@@ -4,14 +4,14 @@
 
 
 **Document ID:** MES-DATA-DES-001  
-**Version:** 1.5
+**Version:** 1.6
 **Status:** CURRENT
 **Database platform:** MongoDB (current)  
 **Scope:** Logical collection inventory; no sample documents or physical collection schemas are defined here.
 
 ## 1. Authority and design basis
 
-The current inventory is derived from the functional baseline in `03_Functional_Structure/FunctionalStructureModules.md` and `FunctionalStructureSections.md`, the project instructions, the requirements conventions in `01_Requirements`, and the current MongoDB decisions in `00_Project_Control/Decisions_Log.md`. All 119 entries remain in scope. Under GEN-001 / DEC-018, inventory inclusion and descriptive scope require no separate documentation sign-off. Inventory scope does not define absent field-level schemas.
+The current inventory is derived from the functional baseline in `03_Functional_Structure/FunctionalStructureModules.md` and `FunctionalStructureSections.md`, the project instructions, the requirements conventions in `01_Requirements`, and the current MongoDB decisions in `00_Project_Control/Decisions_Log.md`. All 119 entries remain in scope. The proposed dependency sequence is maintained in `05_Design/Database/Dependancy_Map.md`; this map organizes design order but does not override inventory scope or resolve open decisions. Under GEN-001 / DEC-018, inventory inclusion and descriptive scope require no separate documentation sign-off. Inventory scope does not define absent field-level schemas.
 
 Collection names follow `mes_<moduleCode>_<singularCollectionName>`, using module codes from the functional baseline and lower camelCase singular nouns. The inventory treats each business concept once; multiple functional sections may use the same collection. Field-level specifications must be documented and checked for consistency before use. No frontend, backend, cloud, or deployment technology is implied.
 
@@ -258,7 +258,7 @@ All functional sections in `FunctionalStructureSections.md` are assigned below. 
 
 ## 17. Recommended next step
 
-Use current inventory version 1.5 and current field-level collection specifications as the baseline for sample-data design. Confirm and provide valid referenced master records and external content-source test locators for any sample run; those sample records are not defined by this inventory. This document contains no sample documents.
+Use `05_Design/Database/Dependancy_Map.md` to sequence remaining field-level specification work, checking its open dependency questions against current requirements and decisions. Once collection specifications are ready for sample-data work, use this current inventory and the specifications as the baseline; confirm valid referenced master records and external content-source test locators for any sample run. Those sample records are not defined by this inventory. This document contains no sample documents.
 
 
 ## Revision History
@@ -282,6 +282,7 @@ Use current inventory version 1.5 and current field-level collection specificati
 | 1.2 | 2026-10-08 | Align inventory reference terminology and applicable reference-field examples with singular entity-stem rule DATA-003 / DEC-015. | MES Project Team | APPROVED |
 | 1.3 | 2026-10-10 | Record Project Owner approval of all 118 inventory entries at scope level; add per-collection scope approval column and clarify that this does not approve field-level schemas. | MES Project Team | APPROVED |
 | 1.5 | 2026-10-11 | Record DEC-022 ownership boundaries and add mes_man_employee; inventory now contains 119 unique collections. | MES Project Team | CURRENT |
+| 1.6 | 2026-10-11 | Register the 119-collection dependency sequence and direct designers to the dependency map before field-level design. | MES Project Team | CURRENT |
 | 1.4 | 2026-10-11 | Apply GEN-001 / DEC-018; remove separate documentation sign-off gates and preserve unresolved rules and operational controls. | MES Project Team | SUPERSEDED |
 
 
@@ -290,3 +291,4 @@ Use current inventory version 1.5 and current field-level collection specificati
 
 
 Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+

@@ -495,3 +495,31 @@ Affected files:
 - 05_Design/Database/Data_Model.md
 - 05_Design/Database/Entity_Relationships.md
 - 00_Project_Control/Change_Log.md
+
+CHG-029
+Date: 2026-10-11
+Artifact: `100_Self_Notes/Prompts/120_Collection_Design.md`
+Previous: Stage 1 directed the user to read the approved Collection Inventory but did not explain the meaning or effect of the `CURRENT — inventory scope only` label.
+New: Clarify that the inventory label records inventory inclusion only; it neither blocks field-level design nor establishes that a field-level specification exists, is complete, or is approved. Collection names and scope remain governed by the inventory, while specification availability/status is reported separately.
+Reason: Prevent the inventory-scope label from being misread as a design gate or schema-approval status.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 100_Self_Notes/Prompts/120_Collection_Design.md
+- 00_Project_Control/Change_Log.md
+
+CHG-030
+Date: 2026-10-11
+Artifacts: `05_Design/Database/Dependancy_Map.md`; `05_Design/Database/Collection_Inventory.md`; `100_Self_Notes/Prompts/120_Collection_Design.md`
+Previous: Stage 3 instructed designers to map dependencies but no durable project artifact captured the 119-collection order; the inventory did not point to a dependency map.
+New: Add a ten-module dependency map containing all 119 inventory collections in seven proposed waves, cross-module dependency flow, known open dependency questions, and maintenance guidance. Update the inventory to v1.6 with an authority pointer and dependency-first next step. Update the collection-design prompt's Stage 3 to require consulting and verifying the map while treating it as sequencing guidance, not schema approval or a source of new decisions.
+Reason: Preserve and operationalize the completed Stage 3 dependency mapping so subsequent collection design can proceed consistently without inventing unresolved decisions.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/Dependancy_Map.md
+- 05_Design/Database/Collection_Inventory.md
+- 100_Self_Notes/Prompts/120_Collection_Design.md
+- 00_Project_Control/Change_Log.md
+
+No Decisions_Log entry was added because this change records a proposed design sequence and documentation pointers, not a new business or technology decision.

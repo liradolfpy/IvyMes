@@ -1197,9 +1197,10 @@ Follow a controlled, multi-stage process.
 
 ### Stage 1 — Inventory review
 
-Read the approved Collection Inventory and identify all collections belonging to the  requested modules.
+Read the Collection Inventory and identify all collections belonging to the  requested modules.
 
 Produce the collection list, grouped by module.
+Treat the inventory label `CURRENT — inventory scope only` as descriptive of inventory inclusion. It is not a gate that prevents field-level collection design, and it does not mean that a field-level specification exists, is complete, or is approved. The inventory remains authoritative for collection names and scope; report specification availability/status separately.
 
 ### Stage 2 — Research
 
@@ -1209,9 +1210,13 @@ Produce a research summary before schema generation.
 
 ### Stage 3 — Dependency mapping
 
-Identify the correct collection design order based on dependencies.
+if file  `05_Design/Database/Dependancy_Map.md` is available , read and verify it against the current Collection Inventory, requirements, project context, approved decisions, and available collection specifications.
 
-Prefer designing foundational collections before dependent transactional collections.
+Use the map as a proposed sequencing aid: foundational collections before dependent transactional and derived collections. Check every collection dependency before design, carry unresolved items as open issues, and do not infer approval or resolve an ownership/relationship decision from its wave placement.
+
+If inventory membership, names, ownership decisions, or dependencies have changed, update the map and its project references under change control before relying on the affected sequence.
+
+Produce or refresh the dependency sequence and open-dependency list before Stage 4. The map does not authorize schema changes or new collections.
 
 ### Stage 4 — Collection design
 
@@ -1250,7 +1255,7 @@ Check:
 
 ### Stage 6 — Cross-module review
 
-After all nine modules are designed, conduct a final cross-module consistency review.
+After all  modules are designed, conduct a final cross-module consistency review.
 
 Pay special attention to relationships between:
 
@@ -1309,3 +1314,4 @@ Do not reverse this sequence.
 A collection design is acceptable only when its fields can be justified through real manufacturing requirements, established MES functionality, applicable standards, or explicitly documented project-specific assumptions.
 
 Begin with Stage 1: review the Collection Inventory and identify the collections to be designed. Do not generate schemas until the research and dependency-mapping stages are complete.
+
