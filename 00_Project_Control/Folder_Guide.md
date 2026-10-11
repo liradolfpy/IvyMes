@@ -127,4 +127,4 @@ Documentation update — 2026-10-11: Apply GEN-001; remove separate documentatio
 
 ## Reuse in a new project
 
-Copy this guide, the generic master instructions, and applicable generic requirements conventions. Populate fresh project context, scope, project-specific rules, and functional modules. Start empty decision and change logs using the generic record formats. Do not copy the previous project's domain designs, datasets, settings, decisions, or revision history as a new project's baseline. Create optional folders only as needed.
+Copy this guide, the generic master instructions, and applicable generic requirements conventions. Populate fresh project context, scope, and functional modules. Use ProjectSpecificRules.md only as an index to dedicated domain rules, without repeating context settings. Start empty decision and change logs using the generic record formats. Do not copy the previous project's domain designs, datasets, settings, decisions, or revision history as a new project's baseline. Create optional folders only as needed.

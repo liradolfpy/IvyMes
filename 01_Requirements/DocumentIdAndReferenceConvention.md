@@ -114,7 +114,7 @@ business number.
 
 ## 5.2 ID Format
 
-Use the ID type, format, and uniqueness scope defined in `03_Functional_Structure/ProjectSpecificRules.md`. Examples below illustrate one possible string-ID convention; they do not prescribe its length for every project. Database-default identifiers may be used only when consistent with the project's selected ID convention.
+Use the ID type, format, and uniqueness scope defined in `00_Project_Control/Project_Context.md`. Examples below illustrate one possible string-ID convention; they do not prescribe its length for every project. Database-default identifiers may be used only when consistent with the project's selected ID convention.
 
 The exact generation mechanism remains OPEN and must be defined and documented before it is relied upon.
 
@@ -126,7 +126,7 @@ mechanism.
 The generation mechanism must guarantee that two active or historical
 entities cannot unintentionally receive the same system ID.
 
-When project-specific rules require database-wide uniqueness, apply:
+When project context require database-wide uniqueness, apply:
 
 > **System IDs shall be globally unique across the project database, not
 > merely unique within an individual collection.**
@@ -358,7 +358,7 @@ specification.
 
 ## 8.5 Project-Specific Numbering Rules
 
-Read the project's numbering table in `03_Functional_Structure/ProjectSpecificRules.md`. It defines business-number patterns, requiredness, uniqueness scopes, and revision lineage rules. Do not infer a universal numbering pattern from an example. The existing project numbering baseline is retained there.
+Read the project's numbering table in `00_Project_Control/Project_Context.md`. It defines business-number patterns, requiredness, uniqueness scopes, and revision lineage rules. Do not infer a universal numbering pattern from an example. The existing project numbering baseline is retained there.
 
 ## 8.3 Sequence Generation
 
@@ -396,7 +396,7 @@ Every collection specification shall identify:
 
 ## 9.2 System ID
 
-The system `_id` shall be unique within the scope defined by project-specific rules. If that scope is database-wide, enforce uniqueness across collections and historical records.
+The system `_id` shall be unique within the scope defined by project context. If that scope is database-wide, enforce uniqueness across collections and historical records.
 
 It shall not be reused after retirement or deletion.
 
@@ -887,7 +887,7 @@ Confirm, for each business entity, whether business numbers are:
 -   Another defined domain
 
 **Status:** OPEN
-Per-module scope decisions are recorded in project-specific rules; unresolved scopes remain OPEN.
+Per-module scope decisions are recorded in project context; unresolved scopes remain OPEN.
 
 ### DECISION-03 --- Business Number Sequence Storage
 
@@ -896,7 +896,7 @@ creation.
 
 **Status:** OPEN
 
-Recorded patterns and scopes do not resolve sequence storage/allocation; consult project-specific rules for remaining open items.
+Recorded patterns and scopes do not resolve sequence storage/allocation; consult project context for remaining open items.
 
 ### DECISION-04 --- Denormalized Name Synchronization
 
@@ -960,7 +960,9 @@ References shall be validated and shall not create orphan records.
 Referenced entities shall normally be retired rather than physically
 deleted when historical transactions depend on them.
 
-Apply the document structure and reference display-pair rules defined in project-specific settings, preserving stable technical identity and explicit reference semantics. Examples illustrate flat denormalization; they do not select that modeling policy for every project.
+Apply the document structure and reference display-pair rules defined in project context settings, preserving stable technical identity and explicit reference semantics. Examples illustrate flat denormalization; they do not select that modeling policy for every project.
 
 
-Documentation update — 2026-10-11: Apply the reusable workflow in GEN-001. Consult project-specific rules for domain settings. Historical revisions are preserved in the project change log.
+Documentation update — 2026-10-11: Apply the reusable workflow in GEN-001. Consult project context for domain settings. Historical revisions are preserved in the project change log.
+
+Reference update — 2026-10-11: Project Context is the authoritative home for selected project settings; specialized module membership remains in functional structure. See the project change log.

@@ -26,7 +26,7 @@ Sample documents are stored separately under `05_Design/Database/Collections/<mo
 
 ## 3. Module folders
 
-Use module codes from `03_Functional_Structure/FunctionalStructureModules.md`; there is no universal module list. Preserve any existing project mapping in project-specific rules. Do not create aliases or duplicate a collection artifact across modules.
+Use module codes from `03_Functional_Structure/FunctionalStructureModules.md`; there is no universal module list. Module membership has one authoritative home in the functional structure; context references that mapping. Do not create aliases or duplicate a collection artifact across modules.
 
 ## 4. Status and change control
 
@@ -37,3 +37,5 @@ This folder organization is a current mandatory project requirement. New collect
 | Version | Date | Change | Status |
 |---|---|---|---|
 | Current | 2026-10-11 | Extract reusable rules; retain project settings separately. Earlier revision records are preserved in the project change log. | CURRENT |
+
+Reference update — 2026-10-11: Project Context is the authoritative home for selected project settings; specialized module membership remains in functional structure. See the project change log.

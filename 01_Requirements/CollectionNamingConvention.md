@@ -23,14 +23,14 @@ This document defines the mandatory naming conventions, structural guidelines, a
 
 ## 3. ID Standards
 
-Use the primary and reference ID type and format in `03_Functional_Structure/ProjectSpecificRules.md` and `DocumentIdAndReferenceConvention.md`. Do not select an ID format from an unrelated project.
+Use the primary and reference ID type and format in `00_Project_Control/Project_Context.md` and `DocumentIdAndReferenceConvention.md`. Do not select an ID format from an unrelated project.
 
 ## 4. File-to-Collection Seeding Rule
 
 - **Storage location:** Save each sample collection file in `05_Design\Database\Collections\<moduleCode>\`, using the module code embedded in its collection name.
 - **File matching:** Create one dedicated file for each collection. The filename must match the collection name exactly, including capitalization, and use the project-defined sample extension.
-- **File format:** Use the output format defined by project-specific rules. For a MongoDB shell workflow, constructors are permitted and strict RFC JSON is not required; for JSON export, use the selected JSON serialization format.
-- **Dataset size:** Use the quantity defined in project-specific rules or the explicit current request.
+- **File format:** Use the output format defined by project context. For a MongoDB shell workflow, constructors are permitted and strict RFC JSON is not required; for JSON export, use the selected JSON serialization format.
+- **Dataset size:** Use the quantity defined in project context or the explicit current request.
 
 ## 5. Collection Design Specification Organization
 
@@ -47,4 +47,6 @@ Use the primary and reference ID type and format in `03_Functional_Structure/Pro
 | 1.2 | 2026-10-08 | Added the current module-code subfolder organization for sample collection documents under DATA-005. | APPROVED |
 
 
-Documentation update — 2026-10-11: Apply the reusable workflow in GEN-001. Consult project-specific rules for domain settings. Historical revisions are preserved in the project change log.
+Documentation update — 2026-10-11: Apply the reusable workflow in GEN-001. Consult project context for domain settings. Historical revisions are preserved in the project change log.
+
+Reference update — 2026-10-11: Project Context is the authoritative home for selected project settings; specialized module membership remains in functional structure. See the project change log.

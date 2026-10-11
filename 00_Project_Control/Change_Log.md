@@ -388,6 +388,7 @@ Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate do
 CHG-024
 Date: 2026-10-11
 Instruction / decision: DEC-020 — retain restored project-specific instructions and modeling convention
+Current applicability: Historical restoration record, superseded by CHG-025 / DEC-021.
 Previous: CHG-023 / DEC-019 classified Project_Instructions.md and DataModelingConvention.md among eight generic files.
 New: Record the Project Owner's restoration of Project_Instructions.md version 0.8 and DataModelingConvention.md version 1.2. These two files are current MES-specific content and are excluded from the reusable generic set. Six other generic files remain current. Amend DEC-019's applicability and annotate CHG-023 while retaining historical records. No restored file or other project artifact was modified in this correction.
 Reason: The Project Owner identified these two documents as project-specific and directed that their restored content be used.
@@ -398,3 +399,28 @@ Affected files in this correction:
 Restored files acknowledged; unchanged by this correction:
 - 00_Project_Control/Project_Instructions.md
 - 01_Requirements/DataModelingConvention.md
+
+
+CHG-025
+Date: 2026-10-11
+Instruction / decision: DEC-021 — reusable procedures and one project context
+Previous: Restored master/modeling documents duplicated MES settings in context and ProjectSpecificRules.md; lookup wording conflicted between modeling sections.
+New: Refine Project Instructions to generic workflow and responsibility rules, Data Modelling Convention to generic procedure, and Project Context to MES identity and configuration. Remove the duplicate module table and detailed scope lists in context; reference their dedicated authorities. Preserve selected settings and all 15 numbering rows. Convert ProjectSpecificRules.md to an index, update dependent references, and record DEC-020 as superseded. Correct stale research notes in the three existing collection specifications that described context as empty; no schemas or business rules changed.
+Reason: Remove repetition and contradictory rule ownership while supporting reuse in new projects.
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 00_Project_Control/Project_Instructions.md
+- 01_Requirements/DataModelingConvention.md
+- 00_Project_Control/Project_Context.md
+- 03_Functional_Structure/ProjectSpecificRules.md
+- 01_Requirements\CollectionDesignOrganization.md
+- 01_Requirements\CollectionNamingConvention.md
+- 01_Requirements\DocumentIdAndReferenceConvention.md
+- 01_Requirements\KeyNamingConvention.md
+- 01_Requirements\SampleDataOrganization.md
+- 00_Project_Control/Folder_Guide.md
+- 00_Project_Control/Decisions_Log.md
+- 00_Project_Control/Change_Log.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_plant.md (context note only)
+- 05_Design/Database/CollectionDesign/plan/mes_plan_workCenter.md (context note only)
+- 05_Design/Database/CollectionDesign/matl/mes_matl_unitOfMeasure.md (context note only)

@@ -25,7 +25,7 @@
 
 **Standards applicability:** ISA-95 is relevant as a technology-neutral organizational and operations integration model. ISA-88 is not directly applicable to a generic discrete-manufacturing plant master. ISO 9001/IATF 16949 do not prescribe this MongoDB entity schema. This specification does not claim compliance or certification.
 
-**Research limitation:** Public product documentation describes user-facing capabilities, not proprietary storage schemas. No ManufNEXT-specific plant governance or integration contract was available. `00_Project_Control/Project_Context.md` is empty.
+**Research limitation:** Public product documentation describes user-facing capabilities, not proprietary storage schemas. No ManufNEXT-specific plant governance or integration contract was available. `00_Project_Control/Project_Context.md` now records the general MES settings; detailed plant governance and integration rules remain open.
 
 ## C. Manufacturing scenarios and lifecycle
 

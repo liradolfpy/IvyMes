@@ -43,7 +43,7 @@ Use these conventions when designing keys and field names. BSON and MongoDB shel
 ## 2. Document identifier and business number
 
 - Use MongoDB's reserved `_id` key as the unique document identifier.
-- Store `_id` using the type and format defined in project-specific rules. The string-ID example above illustrates one possible convention and does not prescribe its length for every project.
+- Store `_id` using the type and format defined in project context. The string-ID example above illustrates one possible convention and does not prescribe its length for every project.
 - Give the record's human-readable business identifier a separate field, such as `recordNo`.
 - Use a consistent business-number pattern within each collection. Include a meaningful prefix and date or sequence component only when required by the business convention, for example `REC-2026-000001`.
 - Do not use `_id` and `recordNo` interchangeably: `_id` is the stable database identifier; `recordNo` is the readable business identifier.
@@ -95,7 +95,7 @@ Field names should make the value's purpose clear, while the BSON type should ma
 
 ## 7. Flat document and scalar-key conventions
 
-- When flat modeling is required by project-specific rules, represent each value with its own top-level key.
+- When flat modeling is required by project context, represent each value with its own top-level key.
 - Do not place fields inside nested documents or arrays when the collection's design requires flat documents.
 - Keep each key focused on one value and one purpose.
 - Do not create duplicate keys with slightly different names for the same information.
@@ -107,7 +107,7 @@ Before accepting a document or generating sample data, verify that:
 
 - All documents in the collection use the same key spelling and casing for the same concepts.
 - `_id` is a unique identifier matching the project-defined type and format, and `recordNo` is the separate business identifier when one is required.
-- Reference IDs have paired display fields, including audit references, when required by project-specific rules.
+- Reference IDs have paired display fields, including audit references, when required by project context.
 - Related display values are consistent when they refer to the same entity.
 - Date, numeric, string, Boolean, and null values use appropriate BSON types.
 - The document follows the project-defined structure; where flat modeling is required it contains no embedded objects or arrays.
@@ -130,3 +130,5 @@ For every new key, ask:
 | Version | Date | Change | Status |
 |---|---|---|---|
 | Current | 2026-10-11 | Extract reusable rules; retain project settings separately. Earlier revision records are preserved in the project change log. | CURRENT |
+
+Reference update — 2026-10-11: Project Context is the authoritative home for selected project settings; specialized module membership remains in functional structure. See the project change log.

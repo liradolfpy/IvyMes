@@ -23,7 +23,7 @@
 
 **Standards:** ISA-95 is relevant to resource/work-center and operations context. ISA-88 is not assumed for discrete work-center hierarchy. ISO 22400 can inform later KPI rollups but does not prescribe this master schema. This design makes no compliance claim.
 
-**Research limitation:** Public documentation establishes capabilities, not vendor database layouts. The project has no current resource-master owner, hierarchy policy, or detailed work-center requirements. Project context file is empty.
+**Research limitation:** Public documentation establishes capabilities, not vendor database layouts. The project has no current resource-master owner, hierarchy policy, or detailed work-center requirements. Project Context now records general MES settings; these detailed work-center rules remain open.
 
 ## C. Manufacturing scenarios and lifecycle
 

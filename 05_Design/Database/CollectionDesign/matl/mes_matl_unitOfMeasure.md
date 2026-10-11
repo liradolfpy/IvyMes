@@ -23,7 +23,7 @@
 
 **Standards applicability:** UCUM or ISO/IEC 80000 may be candidates for interoperable unit codes and quantities, but this project has not selected a unit catalog or coding standard. No standard is declared mandatory by this specification. ISA-95 material models are relevant to exchanging material/quantity context but do not select this project’s UOM vocabulary. No compliance claim is made.
 
-**Research limitation:** Vendor documentation presents user-facing objects, not database layouts. Project requirements do not specify measurement dimensions, SI/UCUM/ERP code authority, precision, rounding, or conversion handling. Project context is empty.
+**Research limitation:** Vendor documentation presents user-facing objects, not database layouts. Project Context now records general MES settings, but measurement dimensions, SI/UCUM/ERP code authority, precision, rounding, and conversion handling remain open.
 
 ## C. Scenarios and lifecycle
 
