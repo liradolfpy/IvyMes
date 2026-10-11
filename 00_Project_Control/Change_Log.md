@@ -743,3 +743,13 @@ Affected files: All 119 specifications under 05_Design/Database/CollectionDesign
 Validation: 119 design files match the 119 unique inventory names; no missing/extra/duplicate collection names; all status labels are APPROVED; all 119 contain required A–Z sections and research citations; no documented relationship target is absent; all documented entity ID/Name pairs have both dictionary fields; no literal newline/quote artifacts or embedded object-array patterns were found. OPEN design issues remain explicitly recorded.
 
 No Decisions_Log entry was added because this entry records design artifacts and consistency repairs, not a newly approved business decision.
+
+CHG-041
+Date: 2026-10-11
+Artifacts: 00_Project_Control/Project_Instructions.md, version 1.1.
+Previous: GEN-001 permitted routine user-authorized documentation work without stage sign-off but did not explicitly establish standing authorization for folder inspection, file reading, and prerequisite verification.
+New: Explicitly authorize routine project inspection, search, reading, workflow verification, and consistency checks without repeated permission requests. Continue requested work within its authorized scope; distinguish document instructions from the user's request. Override earlier project or attached workflow permission gates for these checks while retaining operational business approvals and app-enforced access requirements.
+Reason: The user reported recurring permission prompts despite prior authorization and requested permanent instructions in the workspace.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Validation: Reviewed the addition against GEN-001 and the instruction hierarchy; retained task scope, OPEN issues, and enforced app permissions.
