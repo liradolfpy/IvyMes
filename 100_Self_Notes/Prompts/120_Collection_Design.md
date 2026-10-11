@@ -1197,7 +1197,7 @@ Follow a controlled, multi-stage process.
 
 ### Stage 1 — Inventory review
 
-Read the approved Collection Inventory and identify all collections belonging to the nine requested modules.
+Read the approved Collection Inventory and identify all collections belonging to the  requested modules.
 
 Produce the collection list, grouped by module.
 

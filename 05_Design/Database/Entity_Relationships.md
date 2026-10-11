@@ -5,16 +5,16 @@
 Documentation workflow: GEN-001 / DEC-018 applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
 
 **Document ID:** MES-DATA-ER-PROD-001  
-**Version:** 0.6  
+**Version:** 0.7
 **Status:** CURRENT 
-**Date:** 2026-09-28  
-**Scope:** Production Order / Work Order hierarchy, Andon case/event history, reusable operations, routing-specific steps, Scrap Reason, Instruction Content Reference, and their Production Execution consumers.
+**Date:** 2026-10-11
+**Scope:** Complete MES entity and relationship model across all ten functional modules: Production Execution (`prod`), Traceability (`trace`), Quality Management (`qa`), Performance (`perf`), Planning & Scheduling (`plan`), Material Management (`matl`), Maintenance (`maint`), Manpower Management (`man`), Tool Management (`tool`), and Analytics (`ai`). Current detailed relationships cover selected Production Execution concepts; the other modules are in scope for incremental documentation.
 
 ## 1. Authority and scope
 
 The Production Order / Work Order boundary is recorded in current `DEC-004`, reusable operation ownership in current `DEC-003`, and the current Andon case/event split in current `DEC-005` in `00_Project_Control/Decisions_Log.md`. Collection scope is listed in `05_Design/Database/Collection_Inventory.md`. This relationship view documents logical references; it does not imply MongoDB-enforced foreign keys.
 
-The operation-to-routing-step relationship is based on the flat-document rule. Each relationship is stored on a separate flat document with scalar reference fields and matching display values. This is a partial MES relationship model, not a complete entity-relationship model for every MES module.
+The operation-to-routing-step relationship is based on the flat-document rule. Each relationship is stored on a separate flat document with scalar reference fields and matching display values. The declared scope is the complete ten-module MES; current detailed relationships cover selected Production Execution concepts only, and the other modules remain to be documented.
 
 ## 2. Relationship diagram
 
@@ -91,9 +91,12 @@ No operation list is embedded in a routing, and no event list is embedded in an 
 | 0.4 | 2026-10-07 | Added the approved Scrap Reason and Instruction Content Reference relationships and updated the Work Instruction content model under DEC-008/DEC-009. | APPROVED |
 | 0.5 | 2026-10-07 | Recorded the approved Andon event type vocabulary under DEC-012 and clarified which Andon behavior remains open. | APPROVED |
 | 0.6 | 2026-10-08 | Align reference pairs with grammatically singular entity stems under DATA-003 / DEC-015. | APPROVED |
+| 0.7 | 2026-10-11 | Declared the complete ten-module MES scope and clarified the current Production Execution-only relationship coverage for incremental completion. | CURRENT |
 
 
 
 
 
 Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+
+

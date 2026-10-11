@@ -3,7 +3,7 @@
 # MES Project Context
 
 **Document ID:** MES-CTRL-CONTEXT-001
-**Version:** 1.1
+**Version:** 1.2
 **Status:** CURRENT
 **Last Updated:** 2026-10-11
 
@@ -41,6 +41,17 @@ Implementation, production UI, hardware engineering, testing workstreams, deploy
 - References use MES IDs, separate from external identifiers and human-facing business numbers. Include the corresponding display-value pair, including audit references.
 - Module codes and membership are defined only in `03_Functional_Structure/FunctionalStructureModules.md`; use that mapping for collection names and module folders.
 
+## Cross-module master ownership
+
+The following ownership boundaries are current under DEC-022:
+
+- `plan` owns the MES identities for plants and work centers. Other modules reference those identities. A work center is a distinct organizational planning entity and has no association to a resource or machine; do not infer a work-center-to-asset relationship.
+- `matl` owns shared units of measure used by all modules.
+- Product and Material are distinct entities. Products are manufactured or defined offerings; materials are the material identities used in composition and consumption. A product's material composition is represented through BOM and BOM-component records. Do not equate their IDs or assume a one-to-one product/material mapping.
+- `maint` owns asset/equipment identities, including machines. Work centers remain separate and unrelated to machine/resource identity.
+- `man` owns the MES Employee master and Operator profile. Every Operator record references one Employee using `employeeId` + `employeeName`; the external personnel/HR source remains unselected.
+- A Tool has its own distinct identity in `mes_tool_tool`. A tool may also be represented as a maintainable asset in `mes_maint_asset`; when both records exist, use an explicit `assetId` + `assetName` reference. Do not merge Tool and Asset identities or collections.
+- `mes_plan_resourceCapacity` remains subject to a field-level definition of its capacity target. It must not imply a work-center-to-machine/resource association.
 ## Database modeling settings
 
 **DATA-001:** Every MES MongoDB document is flat, with top-level scalar fields only. No embedded documents or arrays, without exception. Repeated items and relationships use separate flat documents. Document query patterns, indexes, ordering, and cross-record consistency. Separate queries and aggregation, including `$lookup`, are allowed where appropriate; routine use is not required.
@@ -105,4 +116,5 @@ Consult `Decisions_Log.md` for decision provenance and `Change_Log.md` for mater
 
 | Version | Date | Change | Status |
 |---|---|---|---|
-| 1.1 | 2026-10-11 | Consolidate MES settings here; remove repeated generic procedures and module mapping. | CURRENT |
+| 1.2 | 2026-10-11 | Record confirmed cross-module master ownership and employee/operator identity boundaries under DEC-022. | CURRENT |
+| 1.1 | 2026-10-11 | Consolidate MES settings here; remove repeated generic procedures and module mapping. | SUPERSEDED |

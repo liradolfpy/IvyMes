@@ -84,7 +84,7 @@
 | 78 | Maintenance | Failure Codes and Root Cause Analysis |
 | 79 | Maintenance | Maintenance History |
 | 80 | Maintenance | Asset Health Dashboard |
-| 81 | Manpower Management | Operator Master and Profiles |
+| 81 | Manpower Management | Employee Master and Operator Profiles |
 | 82 | Manpower Management | Shift and Crew Management |
 | 83 | Manpower Management | Skill Matrix |
 | 84 | Manpower Management | Certification Management |

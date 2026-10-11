@@ -469,3 +469,29 @@ Project-specific files (19):
 - 100_Self_Notes/Prompts/150_File_Generation.md
 - 100_Self_Notes/Prompts/155_Binary_BSON_Generation.md
 - 100_Self_Notes/Prompts/160_Database_Audit.md
+
+CHG-027
+Date: 2026-10-11
+Instruction / decision: DEC-022 — cross-module master ownership and Employee identity
+Previous: The inventory described plant/work-center, Product/Material, Employee/Operator, Asset/Machine, Tool/Asset, and shared UOM ownership as unresolved or ambiguous. No Employee master collection was listed, while Operator identity referenced an unspecified personnel source. The inventory contained 118 collections.
+New: Record the confirmed ownership boundaries in Project_Context.md and DEC-022. Update the functional module/section descriptions for Employee Master and Operator Profiles. Add `mes_man_employee` to the `man` inventory, make Operator reference Employee, distinguish Product from Material with BOM composition, confirm `plan` ownership of Plant and Work Center, confirm `matl` ownership of shared UOM, define `maint` ownership of machine/equipment assets, and keep Tool distinct with a possible asset association. Explicitly state that Work Center has no machine/resource association. Inventory count is now 119.
+Reason: Apply the Project Owner's explicit domain decisions before cross-module collection schema design and provide an authoritative Employee master for Operator records.
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 00_Project_Control/Project_Context.md
+- 00_Project_Control/Decisions_Log.md
+- 03_Functional_Structure/FunctionalStructureModules.md
+- 03_Functional_Structure/FunctionalStructureSections.md
+- 05_Design/Database/Collection_Inventory.md
+CHG-028
+Date: 2026-10-11
+Artifacts: `05_Design/Database/Data_Model.md`; `05_Design/Database/Entity_Relationships.md`
+Previous: Both artifacts declared Production Execution-only scope, and the Data Model explicitly said it was not a complete MES-wide model.
+New: Declare both artifacts' intended scope as the complete ten-module MES. Clarify in each that the detailed content currently covers selected Production Execution concepts only and that remaining module coverage is to be documented incrementally.
+Reason: Align the scope statements with the complete project scope without implying that unpopulated module models already exist or inventing their design decisions.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/Data_Model.md
+- 05_Design/Database/Entity_Relationships.md
+- 00_Project_Control/Change_Log.md

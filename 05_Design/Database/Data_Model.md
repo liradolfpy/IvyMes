@@ -3,16 +3,16 @@
 # MES Data Model — Production Execution Order and Operation Concepts
 
 **Document ID:** MES-DATA-MOD-PROD-001  
-**Version:** 0.8
+**Version:** 0.9
 **Status:** CURRENT
-**Date:** 2026-09-28  
-**Scope:** Production-order/work-order planning and execution boundary, reusable operation identity, routing-specific operation steps, and controlled Production Execution references.
+**Date:** 2026-10-11
+**Scope:** Complete MES logical data model across all ten functional modules: Production Execution (`prod`), Traceability (`trace`), Quality Management (`qa`), Performance (`perf`), Planning & Scheduling (`plan`), Material Management (`matl`), Maintenance (`maint`), Manpower Management (`man`), Tool Management (`tool`), and Analytics (`ai`). Current detailed coverage remains selected Production Execution concepts; the other modules are in scope for incremental documentation.
 
 ## 1. Authority and scope
 
 This document records the current Production Order / Work Order distinction from `00_Project_Control/Decisions_Log.md` (DEC-004), together with the logical relationship between the current `mes_prod_operation` master and the `mes_prod_routingOperation` relationship collection (DEC-003). The Production Execution inventory is in `05_Design/Database/Collection_Inventory.md`.
 
-This is not a complete MES-wide data model. Other entities and collection specifications require consistency review and documentation under GEN-001; no separate sign-off is required. No sample documents are included.
+The declared scope is the complete ten-module MES, but current detailed content covers selected Production Execution concepts only. Add the remaining module entities and relationships incrementally under GEN-001, using each owning requirement, decision, and specification as authority. No sample documents are included.
 
 ## 2. Modeling rules
 
@@ -108,9 +108,12 @@ Other collections may refer to the reusable operation directly when the business
 | 0.6 | 2026-10-07 | Added approved Scrap Reason and Instruction Content Reference entities; updated required ID/name relationships and superseded DEC-007 via DEC-008/DEC-009. | APPROVED |
 | 0.7 | 2026-10-07 | Recorded the approved Andon event type vocabulary and meanings under DEC-012; retained unresolved transition and sequencing rules. | APPROVED |
 | 0.8 | 2026-10-08 | Align scalar reference-key terminology with singular entity stems under DATA-003 / DEC-015. | APPROVED |
+| 0.9 | 2026-10-11 | Declared the complete ten-module MES scope and clarified the current Production Execution-only coverage for incremental completion. | CURRENT |
 
 
 
 
 
 Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+
+

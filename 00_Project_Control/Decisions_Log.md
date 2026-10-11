@@ -210,3 +210,18 @@ Scope: Supersedes DEC-020 and amends DEC-019's settings location. DATA-001 throu
 Reason: Remove conflicting/repeated definitions and provide a stable reusable core with one project-specific settings source.
 Status: CURRENT
 Recorded By / Date: Project Owner direction on 2026-10-11
+
+DEC-022
+Date: 2026-10-11
+Decision: Approve the following cross-module master ownership and identity boundaries:
+- `mes_plan_plant` and `mes_plan_workCenter` own MES plant and work-center identities. Other modules reference those identities. A work center is a distinct planning/organizational entity and has no association with a machine or resource.
+- `mes_matl_product` and `mes_matl_material` represent distinct business entities. A Product is a manufactured or defined offering; a Material is a material identity used in composition, inventory, or consumption. Product material composition is represented through the BOM and BOM-component records; Product and Material IDs are not interchangeable and no one-to-one mapping is implied.
+- `mes_matl_unitOfMeasure` is the shared owner of controlled units of measure for all MES modules.
+- `mes_maint_asset` owns asset/equipment identities, including machines. Work centers are not machine/resource identities and do not reference assets by virtue of being work centers.
+- Add `mes_man_employee` as the Employee master collection in Manpower Management. `mes_man_operator` remains the MES Operator profile and each Operator references one Employee using `employeeId` + `employeeName`. Employee identity and Operator profile data are distinct. The external HR/personnel source is not selected.
+- `mes_tool_tool` owns a distinct Tool identity and tool-specific lifecycle. A Tool may also be represented by a distinct `mes_maint_asset` record when it is managed in the asset lifecycle; when both records exist, the Tool uses an `assetId` + `assetName` reference. The collections and identities are not merged. Link optionality and synchronization details remain for field-level design.
+- The capacity target and identity model for `mes_plan_resourceCapacity` remain open; it must not establish a work-center-to-machine/resource association.
+Scope: Applies to the Project Context, Functional Structure, Collection Inventory, and future collection specifications and relationship models across the ten MES modules. It adds only `mes_man_employee` to the inventory; it does not add a separate Resource collection or change other collection names.
+Reason: Establish the project owner's confirmed identity ownership boundaries before cross-module collection specifications are designed, prevent entity conflation, and provide the required Employee master target for Operator profiles.
+Status: APPROVED
+Approved By / Date: Project Owner direction on 2026-10-11
