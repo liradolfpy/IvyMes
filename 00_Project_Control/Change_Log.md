@@ -228,3 +228,32 @@ New: Update `05_Design/Database/Collection_Inventory.md` to version 1.3. Record 
 Reason: Make the Project Owner's collection-scope approval visible per inventory row while preserving the distinction between an approved collection inventory and a reviewed field-level schema.
 Requested By: Project Owner
 Approval: Explicit Project Owner approval in the current conversation on 2026-10-10.
+
+
+CHG-022
+Date: 2026-10-11
+Instruction / decision: GEN-001 / DEC-018 — simplified documentation approval workflow
+Previous: Project artifacts used repeated approval gates for inventory, schemas, design rules, and sample generation; the instruction hierarchy placed the current user request below earlier artifacts.
+New: Permit routine work within user-authorized scope with consistency checks and traceable material changes, without separate stage sign-off. Give explicit current user instructions precedence within their scope. Use CURRENT documentation and decision status; keep missing rules OPEN and preserve operational MES approvals and historical records. Correct the self-supersession status of DEC-009 by an explicit log clarification.
+Reason: Remove unnecessary documentation approvals without inventing missing requirements or changing manufacturing controls.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 00_Project_Control\Project_Instructions.md
+- 01_Requirements\CollectionDesignOrganization.md
+- 01_Requirements\CollectionNamingConvention.md
+- 01_Requirements\DataModelingConvention.md
+- 01_Requirements\DocumentIdAndReferenceConvention.md
+- 01_Requirements\KeyNamingConvention.md
+- 01_Requirements\SampleDataOrganization.md
+- 03_Functional_Structure\ProjectScopeBoundary.md
+- 05_Design\Database\Collection_Inventory.md
+- 05_Design\Database\CollectionDesign\matl\mes_matl_unitOfMeasure.md
+- 05_Design\Database\CollectionDesign\plan\mes_plan_plant.md
+- 05_Design\Database\CollectionDesign\plan\mes_plan_workCenter.md
+- 05_Design\Database\Data_Model.md
+- 05_Design\Database\Entity_Relationships.md
+- 00_Project_Control/Decisions_Log.md
+- 00_Project_Control/Change_Log.md
+- 00_Project_Control/Folder_Guide.md
+- 03_Functional_Structure/FunctionalStructureModules.md

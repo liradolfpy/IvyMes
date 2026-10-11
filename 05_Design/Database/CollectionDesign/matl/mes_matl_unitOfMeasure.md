@@ -1,11 +1,11 @@
 # Collection Specification — `mes_matl_unitOfMeasure`
 
-**Specification status:** APPROVED — Project Owner approval dated 2026-10-10  
-**Approval scope:** Approved as the collection design baseline. Open standards, conversion, and ownership questions remain unresolved.  
+**Specification status:** CURRENT — updated under GEN-001 on 2026-10-11
+**Design scope:** Current collection design baseline. Open standards, conversion, and ownership questions remain unresolved.  
 **Version:** 1.0  
 **Module:** Material Management (`matl`)  
 **Collection type:** Reference  
-**Inventory authority:** `05_Design/Database/Collection_Inventory.md` (APPROVED)
+**Inventory authority:** `05_Design/Database/Collection_Inventory.md` (CURRENT)
 
 ## A. Collection overview
 
@@ -38,7 +38,7 @@ Create when the controlled unit catalog is provisioned. Rename only through gove
 | Operator | Readable unit beside entered or displayed quantity. | Field-entry validation belongs to transaction/UI requirements. |
 | Material controller | Resolve base and alternate unit identities. | Conversion ratios are material-specific and not in this collection. |
 | Quality engineer | Identify measurement unit consistently. | Characteristic dimension/tolerance compatibility belongs to QA specs. |
-| Planner / management | Compare quantity units where compatible. | Cross-unit aggregation requires approved conversion service/rules. |
+| Planner / management | Compare quantity units where compatible. | Cross-unit aggregation requires current conversion service/rules. |
 | Integration engineer | Maintain code/name mapping. | External code system and mapping are unresolved. |
 
 ## E. Complete field dictionary
@@ -48,9 +48,9 @@ Create when the controlled unit catalog is provisioned. Rename only through gove
 | `_id` | String | Required | Immutable custom 16-digit MES ID. |
 | `uomCode` | String | Required | Stable unit code; exact authority and code system open. |
 | `uomName` | String | Required | Human-readable singular display name, e.g. “piece” or “kilogram”; controlled language policy open. |
-| `uomSymbol` | String | Optional | Display symbol if approved, e.g. `kg`; uniqueness and locale handling open. |
+| `uomSymbol` | String | Optional | Display symbol if defined, e.g. `kg`; uniqueness and locale handling open. |
 | `description` | String | Optional | Plain-text usage definition. |
-| `physicalDimension` | String | Optional | Broad dimension label only when governed vocabulary is approved; do not use as a conversion factor. Current inclusion is contingent on project approval of a dimension catalog. |
+| `physicalDimension` | String | Optional | Broad dimension label only when governed vocabulary is defined; do not use as a conversion factor. Current inclusion is contingent on a defined dimension catalog. |
 | `status` | String | Required | UOM availability/lifecycle state; allowed values and semantics open. |
 | `createdAt` | BSON Date | Required | UTC creation timestamp. |
 | `createdById` | String | Required | Creator MES ID. |
@@ -59,11 +59,11 @@ Create when the controlled unit catalog is provisioned. Rename only through gove
 | `updatedById` | String | Optional | Updater MES ID. |
 | `updatedBy` | String | Optional | Updater display name. |
 
-**Field decision note:** `physicalDimension` is included to support detection of incompatible quantities only if the project approves a dimension vocabulary. If not approved, omit it before implementation; it is not a conversion definition.
+**Field decision note:** `physicalDimension` is included to support detection of incompatible quantities only if a dimension vocabulary is defined and documented. If not defined, omit it before implementation; it is not a conversion definition.
 
 ## F. Groups, references, identifiers
 
-Identity: `uomCode`, `uomName`, optional symbol/description/dimension. Lifecycle: `status`. Audit: standard fields. No outgoing entity references. Quantity-bearing collections should reference UOM with singular `uomId` + `uomName` (or the project's approved display form); confirm exact key through cross-collection review.
+Identity: `uomCode`, `uomName`, optional symbol/description/dimension. Lifecycle: `status`. Audit: standard fields. No outgoing entity references. Quantity-bearing collections should reference UOM with singular `uomId` + `uomName` (or the project's current display form); confirm exact key through cross-collection review.
 
 `uomCode` is a controlled code, not an `_id` or sequential business number. Code system and uniqueness are open; recommend unique code within the chosen catalog. External aliases must not be conflated with MES identity.
 
@@ -78,7 +78,7 @@ String and BSON Date only. Required: `_id`, `uomCode`, `uomName`, `status`, crea
 3. Code uniqueness must follow the selected code-system scope.
 4. A referenced unit must exist and be eligible for new transactions; retired units remain resolvable historically.
 5. No conversion may be inferred from two unit labels alone.
-6. If `physicalDimension` is retained, enforce its vocabulary and compatibility rules only after approval.
+6. If `physicalDimension` is retained, enforce its vocabulary and compatibility rules only after the rules are defined and documented.
 7. Audit fields are paired and update fields are all-or-none.
 
 ## I. Status values and transitions
@@ -98,13 +98,13 @@ ERP material masters may supply base/alternate UOMs and conversion ratios. SAP d
 | Index | Unique? | Query supported | Rationale / cost |
 |---|---:|---|---|
 | `{ _id: 1 }` | Yes | Direct reference lookup | Mandatory identity. |
-| `{ uomCode: 1 }` | Proposed unique; code authority confirmation required | Code resolution / duplicate detection | Standard master lookup; defer enforcement until code system and case normalization are approved. |
+| `{ uomCode: 1 }` | Proposed unique; code authority confirmation required | Code resolution / duplicate detection | Standard master lookup; defer enforcement until code system and case normalization are defined. |
 | `{ uomName: 1 }` | No | Selection/search | Convenient low-volume lookup; names may not be unique across languages. |
-| `{ physicalDimension: 1, status: 1 }` | No, conditional | Filter compatible units | Only useful if dimension catalog is approved; do not create otherwise. |
+| `{ physicalDimension: 1, status: 1 }` | No, conditional | Filter compatible units | Only useful if the dimension catalog is defined; do not create otherwise. |
 
 ## M. Audit and history
 
-Standard creation audit required and update group optional. No separate history collection is approved. UOM code must not be reassigned after retirement absent an explicit decision; old quantity records keep their original unit reference/snapshot.
+Standard creation audit required and update group optional. No separate history collection is current. UOM code must not be reassigned after retirement absent an explicit decision; old quantity records keep their original unit reference/snapshot.
 
 ## N. Missing-field assessment
 
@@ -112,7 +112,7 @@ Standard creation audit required and update group optional. No separate history 
 |---|---|---|---|---|
 | Material-specific conversion | Alternate packaging or stock unit differs from base unit | Material-UOM relationship or material spec | High | SAP Manage Materials describes alternate UOM numerator/denominator scoped to material. Not part of unit identity. |
 | Code system/aliases | ERP and MES use differing codes | Mapping convention or integration entity | High | SAP supports standard/custom units; project authority remains unselected. |
-| Precision/rounding | Fractional consumption or measurement | Quantity field requirements/service | High | No Decimal constructors; Double rule applies only to approved fields. No UOM-specific numeric rule set. |
+| Precision/rounding | Fractional consumption or measurement | Quantity field requirements/service | High | No Decimal constructors; Double rule applies only to current fields. No UOM-specific numeric rule set. |
 | Localization | Multi-language display names | Locale/content owner TBD | Medium | Vendor docs support multilingual material description; this project has no localization requirement. |
 
 ## O. Missing-collection assessment
@@ -121,7 +121,7 @@ No new collection created. The inventory already includes material/BOM and quant
 
 ## P. Cross-collection consistency check
 
-Use one consistent unit reference pair in all dependent collections, ideally `uomId` + `uomName`; do not vary with plural keys. Keep numeric BSON types consistent with DATA-002 and field-specific approved requirements. Unit codes are never system IDs.
+Use one consistent unit reference pair in all dependent collections, ideally `uomId` + `uomName`; do not vary with plural keys. Keep numeric BSON types consistent with DATA-002 and field-specific current requirements. Unit codes are never system IDs.
 
 ## Q. Completeness metrics
 
@@ -147,8 +147,8 @@ Use one consistent unit reference pair in all dependent collections, ideally `uo
   "uomName": "kilogram",
   "uomSymbol": "kg",
   "description": "Unit of mass",
-  "physicalDimension": "<dimension vocabulary pending approval>",
-  "status": "<value pending project approval>",
+  "physicalDimension": "<dimension vocabulary pending rule definition>",
+  "status": "<value OPEN — value not defined>",
   "createdAt": ISODate("2026-10-08T09:30:00.000+0000"),
   "createdById": "5566778899001122",
   "createdBy": "MES Master Data Service"
@@ -164,15 +164,18 @@ Use one consistent unit reference pair in all dependent collections, ideally `uo
 
 ## T. Open issues
 
-1. Select the authoritative code catalog (e.g. ERP, UCUM, another approved catalog, or governed custom set).
-2. Approve code uniqueness, normalization, aliases, language, and symbol behavior.
+1. Select the authoritative code catalog (e.g. ERP, UCUM, another current catalog, or governed custom set).
+2. Define and document code uniqueness, normalization, aliases, language, and symbol behavior.
 3. Decide whether `physicalDimension` is retained and define its controlled vocabulary.
 4. Define material-specific alternate-unit relation ownership and conversion rules.
 5. Define quantity precision, rounding, and conversion service boundaries.
-6. Approve lifecycle vocabulary and historical reference policy.
+6. Define and document lifecycle vocabulary and historical reference policy.
 
 ## U. Final design review
 
-**Status:** APPROVED by the Project Owner on 2026-10-10. Schema records a controlled unit identity and deliberately keeps conversion contextual. Dimension vocabulary and code governance remain open; do not deploy those constraints until approved.
+**Status:** CURRENT under GEN-001, updated 2026-10-11. Schema records a controlled unit identity and deliberately keeps conversion contextual. Dimension vocabulary and code governance remain open; do not deploy those constraints until defined and documented.
 
 **Research sources:** [SAP DMC Unit of Measure](https://help.sap.com/docs/sap-digital-manufacturing/aa23dac9b58b48c6abda61fc704fb180/c7a911c2bb4d47dbb38e39d4b908c051.html); [SAP DMC Manage Materials](https://help.sap.com/docs/sap-digital-manufacturing/execution/manage-materials); [SAP S/4HANA Material Master UOM Setup](https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/0f4ab800d01c4366b0c9aaff06a64320/9c69e50c986844b292ffc962ce65fb6f.html).
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

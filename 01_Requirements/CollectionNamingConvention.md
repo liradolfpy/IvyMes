@@ -1,8 +1,10 @@
 # MongoDB Collection Naming & Design Instructions
 
-**Version:** 1.2  
-**Status:** APPROVED  
-**Last Updated:** 2026-10-08
+Documentation workflow: GEN-001 / DEC-018 applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
+
+**Version:** 1.3  
+**Status:** CURRENT  
+**Last Updated:** 2026-10-11
 
 ## 1. Overview & Scope
 This document defines the mandatory naming conventions, structural guidelines, and file mapping rules for MongoDB collections.
@@ -38,10 +40,13 @@ This document defines the mandatory naming conventions, structural guidelines, a
 - Store each collection specification at `05_Design\Database\CollectionDesign\<moduleCode>\<collectionName>.md`.
 - `<moduleCode>` is the module code in the collection name and must match one of: `prod`, `trace`, `qa`, `perf`, `plan`, `matl`, `maint`, `man`, `tool`, or `ai`.
 - `<collectionName>` must exactly match the complete MongoDB collection name, including its `mes_` prefix and prescribed casing. For example, `mes_prod_workOrder` is stored at `05_Design\Database\CollectionDesign\prod\mes_prod_workOrder.md`.
-- Keep the `CollectionDesign` root free of current collection specification files; it contains only module subfolders and approved cross-module design guidance.
-- The approved module mapping and organization rule are maintained in `CollectionDesignOrganization.md` and mandated by DATA-004 / DEC-016.
+- Keep the `CollectionDesign` root free of current collection specification files; it contains only module subfolders and current cross-module design guidance.
+- The current module mapping and organization rule are maintained in `CollectionDesignOrganization.md` and mandated by DATA-004 / DEC-016.
 
 | Version | Date | Change | Approval |
 |---|---|---|---|
-| 1.1 | 2026-10-08 | Added the approved module-code subfolder organization for collection design specifications under DATA-004 / DEC-016. | APPROVED |
-| 1.2 | 2026-10-08 | Added the approved module-code subfolder organization for sample collection documents under DATA-005 / DEC-017. | APPROVED |
+| 1.1 | 2026-10-08 | Added the current module-code subfolder organization for collection design specifications under DATA-004 / DEC-016. | APPROVED |
+| 1.2 | 2026-10-08 | Added the current module-code subfolder organization for sample collection documents under DATA-005 / DEC-017. | APPROVED |
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

@@ -3,10 +3,10 @@
 **Document ID:** DATA-REQ-001\
 **Document Name:** ID, Business Number, Uniqueness and Reference
 Management Convention\
-**Version:** 0.4\
-**Status:** APPROVED\
+**Version:** 0.5\
+**Status:** CURRENT\
 **Owner:** MES Project Team\
-**Last Updated:** 2026-10-08
+**Last Updated:** 2026-10-11
 
 ------------------------------------------------------------------------
 
@@ -39,13 +39,13 @@ This document is intended to be used together with:
 
 ## 2. Status and Authority
 
-This document is currently **APPROVED**.
+This document is currently **CURRENT** under GEN-001.
 
 
-Where this document conflicts with a later explicitly approved project
-decision, the approved decision takes precedence.
+Where this document conflicts with an explicit current user instruction or a later current project
+decision, the current decision takes precedence.
 
-Unresolved items are identified in Section 13.
+Unresolved decisions are identified in Section 19.
 
 ------------------------------------------------------------------------
 
@@ -132,7 +132,7 @@ Example:
 "_id": "1000293847561029"
 ```
 
-The exact generation mechanism remains subject to project approval.
+The exact generation mechanism remains OPEN and must be defined and documented before it is relied upon.
 
 ## 5.3 ID Generation
 
@@ -372,11 +372,11 @@ WO-2026-000002
 The actual numbering pattern shall be defined by the relevant collection
 specification.
 
-## 8.5 Approved Production Execution Numbering Rules
+## 8.5 Current Production Execution Numbering Rules
 
-Under approved `DEC-013`, Production Execution business numbers use the patterns and collection-level uniqueness scopes below. `YYYY` is the four-digit calendar year of assignment; `######` is a six-digit, zero-padded sequence. A pattern prefix is reserved for the named collection. Uniqueness applies across the entire collection, including records in every status, unless the table identifies a compound scope.
+Under current `DEC-013`, Production Execution business numbers use the patterns and collection-level uniqueness scopes below. `YYYY` is the four-digit calendar year of assignment; `######` is a six-digit, zero-padded sequence. A pattern prefix is reserved for the named collection. Uniqueness applies across the entire collection, including records in every status, unless the table identifies a compound scope.
 
-| Collection | Field | Required? | Approved pattern / code rule | Uniqueness scope |
+| Collection | Field | Required? | Current pattern / code rule | Uniqueness scope |
 |---|---|---:|---|---|
 | `mes_prod_andonCase` | `andonCaseNo` | Yes | `AC-YYYY-######` | Globally unique within collection |
 | `mes_prod_andonEvent` | `andonEventNo` | Yes | `AE-YYYY-######` | Globally unique within collection |
@@ -531,7 +531,7 @@ The default proposed rule is:
 This prevents historical records from becoming ambiguous.
 
 If a business process requires identifier reuse, it must be explicitly
-approved and the uniqueness rule must define the mechanism.
+current and the uniqueness rule must define the mechanism.
 
 ------------------------------------------------------------------------
 
@@ -608,7 +608,7 @@ validated against the appropriate organizational boundary.
 Example:
 
 A WorkOrder belonging to Plant A should not reference a WorkCenter
-belonging to Plant B unless an approved cross-plant rule explicitly
+belonging to Plant B unless a current cross-plant rule explicitly
 permits it.
 
 ------------------------------------------------------------------------
@@ -672,7 +672,7 @@ Example:
 "active": false
 ```
 
-or the project's approved lifecycle/status field.
+or the project's current lifecycle/status field.
 
 The exact field shall follow the collection specification.
 
@@ -865,7 +865,7 @@ been addressed where applicable.
 
 # 18. Validation Checklist
 
-Before approving a collection specification, verify:
+Before completing a collection specification, verify:
 
 -   [ ] System ID is defined.
 -   [ ] System ID generation is defined.
@@ -894,8 +894,7 @@ Before approving a collection specification, verify:
 
 # 19. Open Decisions
 
-The following items require explicit project approval before this
-convention becomes final.
+The following items remain OPEN and must be defined and documented for the affected design to be complete. They do not require separate documentation sign-off under GEN-001.
 
 ### DECISION-01 --- Exact System ID Generator
 
@@ -925,7 +924,7 @@ Confirm, for each business entity, whether business numbers are:
 -   Another defined domain
 
 **Status:** OPEN
-Resolution for Production Execution: collection-level uniqueness scopes are approved under `DEC-013`; this decision remains open for collections in other modules.
+Resolution for Production Execution: collection-level uniqueness scopes are current under `DEC-013`; this decision remains open for collections in other modules.
 
 ### DECISION-03 --- Business Number Sequence Storage
 
@@ -934,7 +933,7 @@ creation.
 
 **Status:** OPEN
 
-For Production Execution, the patterns and uniqueness scopes are approved under `DEC-013`; the concrete sequence storage/allocation mechanism remains open.
+For Production Execution, the patterns and uniqueness scopes are current under `DEC-013`; the concrete sequence storage/allocation mechanism remains open.
 
 ### DECISION-04 --- Denormalized Name Synchronization
 
@@ -1030,3 +1029,6 @@ deleted when historical transactions depend on them.
 The MES shall use flat, strategically denormalized documents with
 appropriate ID + Name pairs while preserving stable technical identity
 and explicit reference semantics.
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

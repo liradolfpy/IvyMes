@@ -1,9 +1,11 @@
 # Data Modelling Convention
 
-**Status:** APPROVED  
-**Version:** 1.1  
-**Approved By / Date:** Project Owner on 2026-10-08  
-**Last Updated:** 2026-10-08
+Documentation workflow: GEN-001 / DEC-018 applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
+
+**Status:** CURRENT  
+**Version:** 1.2  
+**Updated By / Date:** Project Owner direction on 2026-10-11
+**Last Updated:** 2026-10-11
 
 ## 1. Critical data-modeling requirement — strategically denormalized flat data
 
@@ -28,7 +30,7 @@ Examples of this pattern include:
 - One checklist-item or checklist-result record for each checklist item or result.
 - One evidence-reference record for each evidence item or link when multiple items are associated with a record.
 
-Each related record shall reference its parent using the project’s approved ID and display-value pairing convention. The exact collection boundaries and field definitions shall be specified in the relevant collection design; these examples do not approve particular collection names or fields.
+Each related record shall reference its parent using the project’s current ID and display-value pairing convention. The exact collection boundaries and field definitions shall be specified in the relevant collection design; these examples do not approve particular collection names or fields.
 
 Collection specifications shall describe how related records are retrieved and identify the indexes needed for the documented query patterns, including indexes on parent-reference fields where appropriate. Retrieval may require separate queries or aggregation. The flat-document rule does not prohibit `$lookup`, but collection designs shall not assume it is required for routine access. Specifications shall also identify any consistency, ordering, or lifecycle rules needed across the separate records.
 
@@ -53,7 +55,7 @@ Collection specifications shall describe how related records are retrieved and i
 
 ## 2. Output purpose
 
-The documents will be directly uploaded/executed in **Studio 3T**. Do not generate strict RFC JSON. Use MongoDB/JavaScript constructors such as `ISODate("2026-04-30T06:53:53.699+0000")`, `NumberInt(10)`, and `Double(10.5)` where required by the approved BSON type. These expressions are intentionally not strict RFC JSON.
+The documents will be directly uploaded/executed in **Studio 3T**. Do not generate strict RFC JSON. Use MongoDB/JavaScript constructors such as `ISODate("2026-04-30T06:53:53.699+0000")`, `NumberInt(10)`, and `Double(10.5)` where required by the current BSON type. These expressions are intentionally not strict RFC JSON.
 
 ---
 
@@ -113,9 +115,9 @@ This is an example only. Design the final schema appropriately. Do not put any f
 - Use `ISODate()` for all date/time fields.
 - Use `NumberInt()` for normal integer quantities and counts.
 - Specify a concrete BSON type for every numeric field in its collection specification. Do not use the ambiguous type label `Decimal`.
-- The Production Execution numeric fields covered by approved `DEC-010` use BSON `Double`. In executable `mongosh`/Studio 3T sample documents, use `Double(value)` for these fields so integral values are not inferred as BSON `Int32`.
-- BSON `Double` uses binary floating-point and can approximate some decimal fractions. Collection specifications must define field units and any approved precision, rounding, and range rules. Do not invent those rules where requirements have not established them; record them as open issues.
-- Do not use decimal constructors in project sample documents. Do not represent numeric quantities as strings. Scaled integer storage requires a separate approved decision defining scale, units, range, and conversion rules.
+- The Production Execution numeric fields covered by current `DEC-010` use BSON `Double`. In executable `mongosh`/Studio 3T sample documents, use `Double(value)` for these fields so integral values are not inferred as BSON `Int32`.
+- BSON `Double` uses binary floating-point and can approximate some decimal fractions. Collection specifications must define field units and any current precision, rounding, and range rules. Do not invent those rules where requirements have not established them; record them as open issues.
+- Do not use decimal constructors in project sample documents. Do not represent numeric quantities as strings. Scaled integer storage requires a documented decision defining scale, units, range, and conversion rules.
 - Use strings for textual values and all IDs.
 - Use `true` / `false` for Boolean values.
 - Use `null` where an optional value is genuinely unavailable.
@@ -262,3 +264,6 @@ Do not:
 The final `insertMany()` statement must be directly copy-pasteable into Studio 3T IntelliShell and executable without manual modification.
 
 > **The collection uses flat, strategically denormalized documents with an ID-plus-name/description pair for every reference. No nested documents or arrays are permitted.**
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

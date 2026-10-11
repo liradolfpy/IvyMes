@@ -2,19 +2,19 @@
 
 **Document ID:** MES-DATA-MOD-PROD-001  
 **Version:** 0.8
-**Status:** APPROVED
+**Status:** CURRENT
 **Date:** 2026-09-28  
 **Scope:** Production-order/work-order planning and execution boundary, reusable operation identity, routing-specific operation steps, and controlled Production Execution references.
 
 ## 1. Authority and scope
 
-This document records the approved Production Order / Work Order distinction from `00_Project_Control/Decisions_Log.md` (DEC-004), together with the logical relationship between the approved `mes_prod_operation` master and the `mes_prod_routingOperation` relationship collection (DEC-003). The Production Execution inventory is in `05_Design/Database/Collection_Inventory.md`.
+This document records the current Production Order / Work Order distinction from `00_Project_Control/Decisions_Log.md` (DEC-004), together with the logical relationship between the current `mes_prod_operation` master and the `mes_prod_routingOperation` relationship collection (DEC-003). The Production Execution inventory is in `05_Design/Database/Collection_Inventory.md`.
 
-This is not a complete MES-wide data model. Other entities and collection specifications remain subject to their own review and approval. No sample documents are included.
+This is not a complete MES-wide data model. Other entities and collection specifications require consistency review and documentation under GEN-001; no separate sign-off is required. No sample documents are included.
 
 ## 2. Modeling rules
 
-- MongoDB is the approved database platform.
+- MongoDB is the current database platform.
 - All documents are flat scalar records under DATA-001. No embedded documents or arrays are permitted.
 - A reusable operation is represented once in `mes_prod_operation`.
 - Each occurrence of an operation in a routing is represented by one separate `mes_prod_routingOperation` record. The routing step is not a duplicate operation master.
@@ -37,25 +37,25 @@ This is not a complete MES-wide data model. Other entities and collection specif
 | Andon Case | `mes_prod_andonCase` | One Andon condition with current state and affected resource/production context. | System ID, case number/name, work-center/context references, current status, activation/resolution times. |
 | Andon Event | `mes_prod_andonEvent` | One lifecycle transition belonging to an Andon Case. | System ID, event number, case reference, per-case sequence, event type/time, actor and optional recipient references. |
 
-The attribute lists are logical summaries. The approved collection specifications define the current field dictionaries.
+The attribute lists are logical summaries. The current collection specifications define the current field dictionaries.
 
 ## 3.1 Production order and work order boundary
 
-Under approved `DEC-004` and the supplied project requirement, Production Order represents the macro-level authorization: what product or subassembly, how much, and by when, with overall batch progress. Work Order represents the MES-level execution breakdown: how and where operations are carried out, with shop-floor execution tracking. A Production Order may have multiple Work Orders for tasks or stages across resource or departments.
+Under current `DEC-004` and the supplied project requirement, Production Order represents the macro-level authorization: what product or subassembly, how much, and by when, with overall batch progress. Work Order represents the MES-level execution breakdown: how and where operations are carried out, with shop-floor execution tracking. A Production Order may have multiple Work Orders for tasks or stages across resource or departments.
 
 The flat model stores the parent Production Order as one flat document and each Work Order as its own flat document. Each Work Order carries `productionOrderId` + `productionOrderName` pointing to the parent. The parent does not embed a Work Order array. Dispatch and operation execution attach to the Work Order execution scope. Sales-order/demand-forecast linkage, exact decomposition cardinality, and quantity reconciliation are not specified and remain open.
 
 ## 3.2 Andon case and event boundary
 
-The approved Andon model uses one `mes_prod_andonCase` record as the stable identity and current-state record for a condition. Every activation, escalation, acknowledgement, resolution, or cancellation is a separate `mes_prod_andonEvent` record with `andonCaseId` + `andonCaseName` and an `eventSequenceNo`. A case may therefore be queried for its current status, while its related events provide the ordered transition history. No event array is stored on the case. The case `status` represents its current lifecycle and uses its approved collection-specific allowed values; event `eventType` classifies each recorded transition using the approved vocabulary and meanings in `DEC-012`. The event collection has no separate `status` because no independent event-record lifecycle is currently defined. Permitted transitions, reopen behavior, recipient cardinality, event sequence allocation, and event/case update consistency remain open under `DEC-005`.
+The current Andon model uses one `mes_prod_andonCase` record as the stable identity and current-state record for a condition. Every activation, escalation, acknowledgement, resolution, or cancellation is a separate `mes_prod_andonEvent` record with `andonCaseId` + `andonCaseName` and an `eventSequenceNo`. A case may therefore be queried for its current status, while its related events provide the ordered transition history. No event array is stored on the case. The case `status` represents its current lifecycle and uses its current collection-specific allowed values; event `eventType` classifies each recorded transition using the current vocabulary and meanings in `DEC-012`. The event collection has no separate `status` because no independent event-record lifecycle is currently defined. Permitted transitions, reopen behavior, recipient cardinality, event sequence allocation, and event/case update consistency remain open under `DEC-005`.
 
 ## 3.3 Work-instruction content registry
 
-Under approved `DEC-009`, each `mes_prod_workInstruction` references one record in `mes_prod_instructionContent` using `instructionContentId` + `instructionContentName`. The registry record represents one exact content version and holds its required opaque `instructionContentLocator`. The content payload remains external; MES does not prescribe a provider, URI scheme, or locator syntax. A content reference must be active when assigned to a new Work Instruction revision, and retired references remain available for historical resolution.
+Under current `DEC-009`, each `mes_prod_workInstruction` references one record in `mes_prod_instructionContent` using `instructionContentId` + `instructionContentName`. The registry record represents one exact content version and holds its required opaque `instructionContentLocator`. The content payload remains external; MES does not prescribe a provider, URI scheme, or locator syntax. A content reference must be active when assigned to a new Work Instruction revision, and retired references remain available for historical resolution.
 
 ## 3.4 Scrap-reason reference
 
-Under approved `DEC-008`, `mes_prod_scrapReason` owns controlled reason codes and display names. Every `mes_prod_scrapRecord` requires `scrapReasonId` + `scrapReasonName` to identify one reason. Active reasons may be selected for new Scrap Records; retired reasons remain resolvable for historical records.
+Under current `DEC-008`, `mes_prod_scrapReason` owns controlled reason codes and display names. Every `mes_prod_scrapRecord` requires `scrapReasonId` + `scrapReasonName` to identify one reason. Active reasons may be selected for new Scrap Records; retired reasons remain resolvable for historical records.
 
 ## 4. Repeated-item representation
 
@@ -67,9 +67,9 @@ Other collections may refer to the reusable operation directly when the business
 
 ## 5. Query and index considerations
 
-- Find a routing's steps by `routingId`, ordered by `sequenceNo`; the proposed index is `{ routingId: 1, sequenceNo: 1 }` with uniqueness subject to approval.
+- Find a routing's steps by `routingId`, ordered by `sequenceNo`; the proposed index is `{ routingId: 1, sequenceNo: 1 }` with uniqueness OPEN until its scope is defined.
 - Find routings that use an operation by `operationId`; a non-unique index on `operationId` is recommended if this is a documented access pattern.
-- Resolve an operation reference by `operationId` to `mes_prod_operation._id` and verify the stored display snapshot against the approved name-synchronization rule.
+- Resolve an operation reference by `operationId` to `mes_prod_operation._id` and verify the stored display snapshot against the current name-synchronization rule.
 - Related records may be retrieved through separate queries or aggregation. Their collection designs must specify query patterns and indexes; no backend implementation or mandatory `$lookup` strategy is selected here.
 
 ## 6. Consistency and lifecycle
@@ -109,3 +109,6 @@ Other collections may refer to the reusable operation directly when the business
 
 
 
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

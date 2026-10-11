@@ -1,10 +1,12 @@
 # Collection Design Specification Organization
 
+Documentation workflow: GEN-001 / DEC-018 applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
+
 **Document ID:** MES-REQ-DATA-ORG-001  
-**Version:** 1.0  
-**Status:** APPROVED  
-**Approved By / Date:** Project Owner on 2026-10-08  
-**Last Updated:** 2026-10-08
+**Version:** 1.1  
+**Status:** CURRENT  
+**Updated By / Date:** Project Owner direction on 2026-10-11
+**Last Updated:** 2026-10-11
 
 ## 1. Purpose
 
@@ -24,7 +26,7 @@ Example:
 
 Sample documents are stored separately under `05_Design/Database/Collections/<moduleCode>/` as governed by `SampleDataOrganization.md` and DATA-005 / DEC-017. This requirement defines collection specification storage only.
 
-## 3. Approved module folders
+## 3. Current module folders
 
 | Module code | Module |
 |---|---|
@@ -43,10 +45,13 @@ Use the module code from the collection name as the folder name. Do not create a
 
 ## 4. Status and change control
 
-This folder organization is an approved mandatory project requirement. New collection specifications and revisions shall follow it. When an existing specification is moved or renamed, update every project link or path reference in the same change and record the change in the project change log.
+This folder organization is a current mandatory project requirement. New collection specifications and revisions shall follow it. When an existing specification is moved or renamed, update every project link or path reference in the same change and record the change in the project change log.
 
 ## Revision history
 
 | Version | Date | Change | Approval |
 |---|---|---|---|
 | 1.0 | 2026-10-08 | Established mandatory module-code subfolders for all collection design specifications under DATA-004 / DEC-016. | APPROVED |
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

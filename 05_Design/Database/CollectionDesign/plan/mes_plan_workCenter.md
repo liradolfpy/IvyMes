@@ -1,11 +1,11 @@
 # Collection Specification — `mes_plan_workCenter`
 
-**Specification status:** APPROVED — Project Owner approval dated 2026-10-10  
-**Approval scope:** Approved as the collection design baseline. Open items remain unresolved.  
+**Specification status:** CURRENT — updated under GEN-001 on 2026-10-11
+**Design scope:** Current collection design baseline. Open items remain unresolved.  
 **Version:** 1.0  
 **Module:** Planning & Scheduling (`plan`)  
 **Collection type:** Master  
-**Inventory authority:** `05_Design/Database/Collection_Inventory.md` (APPROVED)
+**Inventory authority:** `05_Design/Database/Collection_Inventory.md` (CURRENT)
 
 ## A. Collection overview
 
@@ -23,13 +23,13 @@
 
 **Standards:** ISA-95 is relevant to resource/work-center and operations context. ISA-88 is not assumed for discrete work-center hierarchy. ISO 22400 can inform later KPI rollups but does not prescribe this master schema. This design makes no compliance claim.
 
-**Research limitation:** Public documentation establishes capabilities, not vendor database layouts. The project has no approved resource-master owner, hierarchy policy, or detailed work-center requirements. Project context file is empty.
+**Research limitation:** Public documentation establishes capabilities, not vendor database layouts. The project has no current resource-master owner, hierarchy policy, or detailed work-center requirements. Project context file is empty.
 
 ## C. Manufacturing scenarios and lifecycle
 
 Covered scenarios: facility-scoped work-center search; a cell/area hierarchy; assignment of operations and schedules to a center; shared work center referenced by many transactions; center rename or retirement; multiple plants with duplicate local codes; unavailable equipment distinct from work-center identity.
 
-Creation event is master-data registration. Updates change descriptive or hierarchy values. Historical transactions retain scalar reference snapshots. Whether a work center may be moved across plants, whether parent-child cycles are prohibited, and exact lifecycle transitions require approval.
+Creation event is master-data registration. Updates change descriptive or hierarchy values. Historical transactions retain scalar reference snapshots. Whether a work center may be moved across plants, whether parent-child cycles are prohibited, and exact lifecycle transitions remain OPEN until defined and documented.
 
 ## D. Functional coverage matrix
 
@@ -65,7 +65,7 @@ Creation event is master-data registration. Updates change descriptive or hierar
 
 Identity: code/name/description. Scope: required `plantId` + `plantName`; optional self-reference `parentWorkCenterId` + `parentWorkCenterName`. Lifecycle: `status`. Audit: standard groups.
 
-Both references use 16-digit MES system IDs. Parent must belong to the same plant unless an approved cross-plant hierarchy rule allows otherwise. Parent references must not create cycles; enforcement and hierarchy depth are open. Work-center code is a business key, not `_id`; no approved numbering pattern or uniqueness scope exists outside `prod`.
+Both references use 16-digit MES system IDs. Parent must belong to the same plant unless a current cross-plant hierarchy rule allows otherwise. Parent references must not create cycles; enforcement and hierarchy depth are open. Work-center code is a business key, not `_id`; no current numbering pattern or uniqueness scope exists outside `prod`.
 
 ## G. Data types and requiredness
 
@@ -75,14 +75,14 @@ String and BSON Date only. Required: `_id`, code/name, plant reference pair, sta
 
 1. `_id` is unique immutable 16-digit string.
 2. `plantId` resolves to an existing plant; new scheduling/execution references require an eligible plant.
-3. `parentWorkCenterId` resolves to a different existing work center in the same plant (default recommendation pending approval); reject cycles.
+3. `parentWorkCenterId` resolves to a different existing work center in the same plant (proposed default; rule remains OPEN); reject cycles.
 4. Parent ID/name and audit ID/display pairs are atomic.
 5. Codes/names are trimmed nonempty strings.
-6. Lifecycle and eligibility checks follow the approved work-center vocabulary once established.
+6. Lifecycle and eligibility checks follow the current work-center vocabulary once established.
 
 ## I. Status values and transitions
 
-`status` is required and denotes whether the center is eligible for new planning/dispatch and whether it remains a valid historical reference. Allowed values, definitions, transition graph, and effect on in-progress schedules are **OPEN**. No values are silently approved.
+`status` is required and denotes whether the center is eligible for new planning/dispatch and whether it remains a valid historical reference. Allowed values, definitions, transition graph, and effect on in-progress schedules are **OPEN**. No values are silently established.
 
 ## J. Relationships
 
@@ -97,8 +97,8 @@ ERP work-center identifiers and MES resource mappings may be needed, but the pro
 | Index | Unique? | Query supported | Rationale / cost |
 |---|---:|---|---|
 | `{ _id: 1 }` | Yes | Direct reference lookup | Mandatory system identity. |
-| `{ plantId: 1, workCenterCode: 1 }` | Proposed unique; scope approval open | Plant-scoped code lookup and duplicate validation | Natural likely scope, but confirm whether code is globally unique or plant-local before enforcing. |
-| `{ plantId: 1, status: 1, workCenterName: 1 }` | No | Eligible center selection by plant/name | Supports planning and UI filters; status semantics must be approved. |
+| `{ plantId: 1, workCenterCode: 1 }` | Proposed unique; scope definition OPEN | Plant-scoped code lookup and duplicate validation | Natural likely scope, but confirm whether code is globally unique or plant-local before enforcing. |
+| `{ plantId: 1, status: 1, workCenterName: 1 }` | No | Eligible center selection by plant/name | Supports planning and UI filters; status semantics must be defined and documented. |
 | `{ parentWorkCenterId: 1 }` | No | Enumerate children | Useful for hierarchy traversal; additional write cost is modest. |
 
 ## M. Audit and history
@@ -111,8 +111,8 @@ Standard creation audit is required; update triplet optional as a group. No hist
 |---|---|---|---|---|
 | Resource/machine assignment relationship | Work center contains multiple resources and may share resources per product/process | Inventory owner undecided | High | SAP feature scope documents a work-center hierarchy to resource level; keep assignment outside this record. Confirm separate relationship collection/owner. |
 | Capacity/shift calendar | Shift-specific available capacity | `mes_plan_resourceCapacity` / calendar and assignment collections | High | Inventory already separates capacity/calendar concepts; detailed links remain to be specified. |
-| Local vs global work-center code uniqueness | Identical codes across plants may be valid | This collection | High | Project uniqueness convention requires a defined per-collection scope; none approved. |
-| Work-center type/department | Different center capabilities | Governance/configuration TBD | Medium | No approved taxonomy or requirement; avoid speculative enum. |
+| Local vs global work-center code uniqueness | Identical codes across plants may be valid | This collection | High | Project uniqueness convention requires a defined per-collection scope; none defined. |
+| Work-center type/department | Different center capabilities | Governance/configuration TBD | Medium | No current taxonomy or requirement; avoid speculative enum. |
 
 ## O. Missing-collection assessment
 
@@ -149,7 +149,7 @@ Scenario metric is indicative only; unresolved resource assignments and code uni
   "description": "CNC machining and in-process transfer area",
   "plantId": "1000293847561029",
   "plantName": "Bengaluru Vehicle Systems Plant",
-  "status": "<value pending project approval>",
+  "status": "<value OPEN — value not defined>",
   "createdAt": ISODate("2026-10-08T09:15:00.000+0000"),
   "createdById": "5566778899001122",
   "createdBy": "MES Master Data Service"
@@ -167,13 +167,16 @@ Scenario metric is indicative only; unresolved resource assignments and code uni
 
 1. Resolve work-center/resource/machine entity ownership across `plan`, `maint`, and `prod`.
 2. Confirm code uniqueness scope and pattern.
-3. Approve status vocabulary, availability semantics, and transition effects.
+3. Define and document status vocabulary, availability semantics, and transition effects.
 4. Confirm parent hierarchy needs, cycle handling, and cross-plant rules.
 5. Define assignment/effectivity and master rename history behavior.
 6. Determine external system identifiers and integration direction.
 
 ## U. Final design review
 
-**Status:** APPROVED by the Project Owner on 2026-10-10. Flat structure and reference pairs conform to conventions. Readiness for implementation depends on open ownership, uniqueness, and lifecycle decisions; schema approval does not close them.
+**Status:** CURRENT under GEN-001, updated 2026-10-11. Flat structure and reference pairs conform to conventions. Readiness for implementation depends on open ownership, uniqueness, and lifecycle decisions; current schema status does not close them.
 
 **Research sources:** [ISA-95 series](https://www.isa.org/standards-and-publications/isa-standards/isa-95-standard); [SAP DMC Feature Scope 2605](https://help.sap.com/doc/13c9f83611f94a5ab2c94f23cacfc217/latest/en-US/SAP_DMC_FSD_enUS.pdf); [SAP Order POD](https://help.sap.com/docs/sap-digital-manufacturing/execution/order-pod).
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

@@ -1,7 +1,9 @@
 # Key Naming Instructions
 
-**Version:** 0.4
-**Status:** APPROVED
+Documentation workflow: GEN-001 / DEC-018 applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
+
+**Version:** 0.5
+**Status:** CURRENT
 **Updated:** 2026-10-08
 
 ## Purpose
@@ -33,7 +35,7 @@ Use these conventions when designing keys and field names for MongoDB documents.
 - Prefer established business terminology used consistently across the application.
 - Use singular nouns for a field that holds one value, such as `relatedEntityName`.
 - Use a grammatically singular entity name in every reference key. Pair singular `<entity>Id` with singular `<entity>Name`; do not pluralize the entity stem to imply a multi-reference. For irregular plurals, use the conventional singular form, such as `traceableEntitiesId` → `traceableEntityId`, `traceabilityIdentitiesName` → `traceabilityIdentityName`, and `workOrdersId` + `workOrdersName` → `workOrderId` + `workOrderName`.
-- A repeated relationship is represented by multiple documents, each carrying one singular reference pair, under DATA-001. Do not encode multiplicity by pluralizing a scalar key. If one document truly must refer to several entities, model the relationship as separate flat records or obtain an explicitly approved design decision; arrays remain prohibited.
+- A repeated relationship is represented by multiple documents, each carrying one singular reference pair, under DATA-001. Do not encode multiplicity by pluralizing a scalar key. If one document truly must refer to several entities, model the relationship as separate flat records or obtain a documented design decision; arrays remain prohibited.
 - Use a stable name consistently across every document in the same collection. Do not vary between synonyms such as `recordNo`, `recordNumber`, and `documentNo` for the same concept.
 - Avoid spaces, hyphens, punctuation, and special characters in field names, except for MongoDB's conventional `_id` key.
 - Do not use vague names such as `data`, `value`, `info`, or `misc` unless the field's purpose is made explicit by its context and documented.
@@ -74,7 +76,7 @@ Use `createdAt`/`createdById`/`createdBy` together when creation metadata is ava
 
 - Use `status` for the document's primary lifecycle state when the collection has one. Do not add `status` to a record that has no independent lifecycle; an event classification such as `eventType` may be sufficient when each record represents an event/transition.
 - Define `status` independently for each collection. Do not impose one shared status vocabulary across unrelated business entities.
-- For every collection that has `status`, document whether it is required, its collection-specific meaning, its allowed values, and the meaning of each value. Define state-dependent field requirements and permitted transitions only where supported by approved requirements/decisions; mark unresolved rules as open rather than inferring them.
+- For every collection that has `status`, document whether it is required, its collection-specific meaning, its allowed values, and the meaning of each value. Define state-dependent field requirements and permitted transitions only where supported by current requirements/decisions; mark unresolved rules as open rather than inferring them.
 - Use a consistent set of readable status values within a collection, selecting only values that fit its domain. Use consistent capitalization and spelling; do not mix forms such as `InProgress`, `in_progress`, and `In-Progress` for the same state.
 - For additional independent states, use a descriptive field name such as `qualityStatus` or `approvalStatus` rather than overloading `status`.
 - Store status values as strings, not numeric codes, unless the application has an explicitly documented code system.
@@ -131,3 +133,6 @@ For every new key, ask:
 | 0.3 | 2026-10-07 | Clarified that numeric fields must use a concrete BSON type under DATA-002 and use fractional precision terminology. | APPROVED |
 | 0.4 | 2026-10-08 | Require grammatically singular entity stems in scalar reference keys and define conventional singularization for irregular plurals; repeated references remain separate flat records under DATA-001. | APPROVED |
 
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

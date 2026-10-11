@@ -34,7 +34,7 @@
 
 | Folder | Purpose and typical contents |
 |---|---|
-| `00_Project_Control` | Project governance and coordination: master instructions, project context, decision and change logs, folder guidance, plans, status tracking, and approval records. |
+| `00_Project_Control` | Project governance and coordination: master instructions, project context, decision and change logs, folder guidance, plans, status tracking, and change records. |
 | `01_Requirements` | Business, user, functional, non-functional, security, data, interface, and operational requirements; use cases; acceptance criteria; constraints; and traceability materials. |
 | `02_Schematics` | Visual process and system views such as flowcharts, context maps, sequence diagrams, deployment views, and other schematics. Keep source files and exported images together where practical. |
 | `03_Functional_Structure` | Functional decomposition, capability or module definitions, process areas, workflows, responsibilities, and scope boundaries. Use project terminology rather than assuming a particular industry structure. |
@@ -42,21 +42,21 @@
 | `05_Design` | Detailed design artifacts derived from requirements and architecture. Organize by design concern, such as data, interfaces, components, user experience, security, or deployment. |
 | `05_Design/Database` | Optional data-design area. Store inventories, conceptual/logical models, entity relationships, schema or collection specifications, and database-specific examples here. Use only the subfolders relevant to the project’s data technology. |
 | `05_Design/Database/CollectionDesign/<domainCode>` | Optional collection-oriented design area. Store one detailed specification per collection, grouped by an agreed domain label. A specification typically documents purpose, fields, types, requiredness, validation, references, indexes, lifecycle, audit, assumptions, and open issues. |
-| `05_Design/Database/Collections/<domainCode>` | Optional example-data area for collection-oriented projects. Store one example or seed-data file per collection, following the corresponding approved specification. Do not treat examples as production data unless explicitly approved. |
+| `05_Design/Database/Collections/<domainCode>` | Optional example-data area for collection-oriented projects. Store one example or seed-data file per collection, following the corresponding current specification. Do not treat examples as production data unless explicitly selected and recorded within the authorized scope. |
 | `05_Design/Database/BsonFiles` | Optional location for BSON-formatted artifacts when the selected database and project workflow use BSON. Do not use it for unrelated binary files. |
 | `06_Testing` | Verification planning and evidence where testing is in scope: test strategies, plans, cases, execution records, results, defects, and acceptance evidence. If software testing is outside scope, leave the folder unused and state that in project scope. |
 | `10_Sample_Documents` | Supplied or reference documents used as inputs, examples, or source material. Preserve originals; generated deliverables belong in `90_Output` or their explicitly designated destination. |
-| `80_Knowledge_Base` | Curated reference material used across the project, such as approved glossaries, research, standards references, technology documentation, and reusable internal guidance. Record source and relevance where appropriate. |
+| `80_Knowledge_Base` | Curated reference material used across the project, such as current glossaries, research, standards references, technology documentation, and reusable internal guidance. Record source and relevance where appropriate. |
 | `90_Output` | Generated project deliverables that do not have a more specific designated home. Organize outputs into clear subfolders, such as `Requirements`, `Design`, `Reports`, or `Presentations`. |
 | `99_Archive` | Superseded or inactive project artifacts retained purely for historical reference. Do not read or use archived content as current project logic, requirements, constraints, decisions, or design authority. Do not overwrite archived originals. |
 | `100_Self_Notes` | Internal notes, prompts, checklists, and process aids retained purely for reference. Do not read or use their contents to determine project logic, requirements, constraints, decisions, or design behavior. |
-| `100_Self_Notes/Prompts` | Optional storage for reusable task prompts and workflow instructions retained for reference only. Do not treat prompt text as project logic or authority; follow current approved project artifacts and the current user request. |
+| `100_Self_Notes/Prompts` | Optional storage for reusable task prompts and workflow instructions retained for reference only. Do not treat prompt text as project logic or authority; follow current current project artifacts and the current user request. |
 
 ## Artifact relationship and authority
 
 ```mermaid
 flowchart TD
-    C["00_Project_Control<br/>Governance, decisions, approvals"]
+    C["00_Project_Control<br/>Governance, decisions, change records"]
     R["01_Requirements<br/>What the solution must do"]
     F["03_Functional_Structure<br/>Capabilities and responsibilities"]
     A["04_Architecture<br/>System-level structure and boundaries"]
@@ -106,9 +106,9 @@ For projects using database collections, keep these artifacts distinct:
 1. **Inventory:** identifies which collections are in scope and gives each collection a high-level purpose and owner.
 2. **Data model and relationship view:** explains the domain entities and how they relate across the solution.
 3. **Collection specification:** defines the schema for one collection, including every field’s name, type, meaning, requiredness, validation, reference behavior, indexes, and lifecycle rules.
-4. **Example data:** demonstrates the approved field structure and conventions. It does not define or silently change the schema.
+4. **Example data:** demonstrates the current field structure and conventions. It does not define or silently change the schema.
 
-Approval should state its scope. Approval of a collection inventory does not automatically approve field-level schemas, and approval of a schema does not automatically approve sample data for production use. Record formal decisions and material artifact changes in the project’s decision and change records.
+Inventory scope, field-level schemas, and illustrative data are distinct artifacts. Each must be documented and checked for consistency; no separate sign-off is required under GEN-001. A schema or sample dataset does not establish production readiness. Record material decisions and artifact changes in the project logs.
 
 ## Folder-use rules
 
@@ -118,6 +118,9 @@ Approval should state its scope. Approval of a collection inventory does not aut
 4. Use clear filenames and follow project naming, versioning, and status conventions.
 5. When a file moves or is renamed, update affected links and path references in the same change and record material changes in the project change log.
 6. Use `99_Archive` only for superseded or inactive materials that must be retained; identify the current replacement where applicable.
-7. Treat `100_Self_Notes` and `99_Archive` as reference-only folders. Do not read or use their contents for project logic, requirements, decisions, or design behavior. If useful material is to become authoritative, copy and review it into the appropriate current project folder and approve it there; until then it has no authority.
+7. Treat `100_Self_Notes` and `99_Archive` as reference-only folders. Do not read or use their contents for project logic, requirements, decisions, or design behavior. If useful material is to become authoritative, copy and review it into the appropriate current project folder and record its incorporation there; until then it has no authority.
 8. Do not create empty folders merely to match the template. Add optional subfolders when project contents justify them, and document project-specific deviations.
 
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

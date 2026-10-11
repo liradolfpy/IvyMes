@@ -1,19 +1,19 @@
 # Collection Specification — `mes_plan_plant`
 
-**Specification status:** APPROVED — Project Owner approval dated 2026-10-10  
-**Approval scope:** Approved as the collection design baseline. Open items below remain unresolved and are not treated as decisions.  
+**Specification status:** CURRENT — updated under GEN-001 on 2026-10-11
+**Design scope:** Current collection design baseline. Open items below remain unresolved and are not treated as decisions.  
 **Version:** 1.0  
 **Module:** Planning & Scheduling (`plan`)  
 **Collection type:** Master  
-**Inventory authority:** `05_Design/Database/Collection_Inventory.md` (APPROVED)
+**Inventory authority:** `05_Design/Database/Collection_Inventory.md` (CURRENT)
 
 ## A. Collection overview
 
-`mes_plan_plant` owns the MES-facing identity and lifecycle of one production plant/site boundary. It enables planning and execution records to be scoped to a facility. It does not own enterprise, company, site hierarchy, addresses, or ERP plant mappings because those owners and boundaries are not established in the approved inventory.
+`mes_plan_plant` owns the MES-facing identity and lifecycle of one production plant/site boundary. It enables planning and execution records to be scoped to a facility. It does not own enterprise, company, site hierarchy, addresses, or ERP plant mappings because those owners and boundaries are not established in the current inventory.
 
 **Business definition:** A plant is an organizational manufacturing facility or site at which production operations are planned and coordinated. The record is a master identity, not a production transaction.
 
-**Owning module:** Planning & Scheduling, as assigned by the approved inventory. This ownership is an inventory assignment, not an enterprise-wide master-data governance decision.
+**Owning module:** Planning & Scheduling, as assigned by the current inventory. This ownership is an inventory assignment, not an enterprise-wide master-data governance decision.
 
 ## B. Research summary
 
@@ -51,7 +51,7 @@ Create when a plant is registered for MES use. Update descriptive fields under t
 | `plantCode` | String | Required | Human-facing plant code. Nonblank; exact syntax and uniqueness scope require confirmation. |
 | `plantName` | String | Required | Current display name; nonblank. |
 | `description` | String | Optional | Short plain-text description; no nested content. |
-| `status` | String | Required | Plant lifecycle state. Allowed values and transitions are open; do not assume `Active`/`Inactive` until approved. |
+| `status` | String | Required | Plant lifecycle state. Allowed values and transitions are open; do not assume `Active`/`Inactive` until defined and documented. |
 | `createdAt` | BSON Date | Required | Creation timestamp in UTC. |
 | `createdById` | String | Required | Creator's MES system ID. |
 | `createdBy` | String | Required | Creator display name paired with `createdById`. |
@@ -59,7 +59,7 @@ Create when a plant is registered for MES use. Update descriptive fields under t
 | `updatedById` | String | Optional | Updater's MES system ID; conditional with the other update fields. |
 | `updatedBy` | String | Optional | Updater display name paired with `updatedById`. |
 
-No arrays, child lists, embedded settings, or fields for unapproved enterprise/site ownership are included.
+No arrays, child lists, embedded settings, or fields for undefined enterprise/site ownership are included.
 
 ## F. Field groups; references and identifiers
 
@@ -67,7 +67,7 @@ Identity: `_id`, `plantCode`, `plantName`, `description`. Lifecycle: `status`. A
 
 This collection has no outgoing business-entity reference. Incoming references use `plantId` + `plantName` and must point to this collection. Audit references follow the mandatory `createdById` + `createdBy` and `updatedById` + `updatedBy` convention.
 
-`plantCode` is a business key, not `_id`. The approved project convention leaves non-Production-Execution numbering patterns and uniqueness scopes to collection-specific rules; no pattern is invented here. External identifiers are omitted until the integration owner and source-system mapping are defined.
+`plantCode` is a business key, not `_id`. The current project convention leaves non-Production-Execution numbering patterns and uniqueness scopes to collection-specific rules; no pattern is invented here. External identifiers are omitted until the integration owner and source-system mapping are defined.
 
 ## G. Data types and requiredness
 
@@ -78,13 +78,13 @@ The collection uses BSON String, Date only; no fractional or integer measurement
 1. `_id` must be a unique 16-digit string and immutable.
 2. `plantCode` and `plantName` must be nonempty trimmed strings.
 3. Audit update fields must be all present or all absent; every ID has its paired display value.
-4. `status` must be checked against a separately approved plant vocabulary once defined.
-5. Do not physically delete a referenced plant absent an approved retention/deletion rule.
+4. `status` must be checked against the defined plant vocabulary once defined.
+5. Do not physically delete a referenced plant absent a current retention/deletion rule.
 6. Do not accept references to an unknown or retired plant for new work; the exact policy remains open.
 
 ## I. Status values and transitions
 
-`status` is required and denotes plant master lifecycle/availability for new MES transactions. Its allowed values, definitions, transition graph, and effect on existing references are **OPEN**. No values are marked approved by this specification.
+`status` is required and denotes plant master lifecycle/availability for new MES transactions. Its allowed values, definitions, transition graph, and effect on existing references are **OPEN**. No values are established by this specification.
 
 ## J. Relationships
 
@@ -92,28 +92,28 @@ Incoming references are expected from work centers and many module transactions/
 
 ## K. External systems
 
-ERP plant codes are common integration concepts, but no ERP product or mapping contract is approved for this project. `plantCode` is the MES business key only; it must not be silently treated as an ERP identifier. Add an external mapping only after the integration contract and owner are approved.
+ERP plant codes are common integration concepts, but no ERP product or mapping contract is current for this project. `plantCode` is the MES business key only; it must not be silently treated as an ERP identifier. Add an external mapping only after the integration contract and owner are defined.
 
 ## L. Recommended indexes
 
 | Index | Unique? | Query supported | Rationale / cost |
 |---|---:|---|---|
 | `{ _id: 1 }` | Yes (MongoDB mandatory) | Direct reference lookup | System identity. |
-| `{ plantCode: 1 }` | Proposed unique, approval pending | Search by code / duplicate detection | Appropriate for master lookup; cannot finalize until scope and source-of-truth are confirmed. |
+| `{ plantCode: 1 }` | Proposed unique, rule definition OPEN | Search by code / duplicate detection | Appropriate for master lookup; cannot finalize until scope and source-of-truth are confirmed. |
 | `{ plantName: 1 }` | No | Name search and administration | Useful for low-volume master-data search; write cost is small, collation/search semantics remain to be specified. |
-| `{ status: 1, plantName: 1 }` | No | Select eligible plants after lifecycle approval | Optional UI filter; defer if no query requires it. |
+| `{ status: 1, plantName: 1 }` | No | Select eligible plants after lifecycle definition | Optional UI filter; defer if no query requires it. |
 
 Do not add every proposed index automatically. Confirm access patterns and uniqueness before deployment.
 
 ## M. Audit and history
 
-Required standard creation audit fields; optional update group. There is no separate history collection in the approved inventory. Name changes and lifecycle history retention are unresolved; audit-field presence alone does not provide field-level history.
+Required standard creation audit fields; optional update group. There is no separate history collection in the current inventory. Name changes and lifecycle history retention are unresolved; audit-field presence alone does not provide field-level history.
 
 ## N. Exceptions and missing-field assessment
 
 | Candidate | Scenario / why | Target | Priority | Evidence / disposition |
 |---|---|---|---|---|
-| Parent enterprise/company/site reference | Multi-entity organization hierarchy | No approved owner | High | ISA-95 supports hierarchy concepts, but project ownership and required hierarchy levels are not decided; do not add a speculative key. |
+| Parent enterprise/company/site reference | Multi-entity organization hierarchy | No current owner | High | ISA-95 supports hierarchy concepts, but project ownership and required hierarchy levels are not decided; do not add a speculative key. |
 | Time zone / locale | Local schedules and timestamps | Plant or calendar configuration TBD | Medium | Needed by some multi-region deployments; no project timezone rule or owning collection confirmed. |
 | ERP plant mapping | Inbound planning and reconciliation | Integration/mapping owner TBD | High | SAP documentation demonstrates plant-scoped execution; project external-system contract is absent. |
 | Address/contact details | Facility identification | Out of current inventory scope | Low | No functional requirement supplied. |
@@ -141,7 +141,7 @@ Uses singular `plantId` + `plantName`; 16-digit string references; standard audi
 | Research-backed field groups | plant identity, scope, lifecycle |
 | Project-specific inferred field groups | code/name, audit, status placeholder |
 
-Metric is a design review estimate, not proof of completeness. The one uncovered scenario is verified external-ERP mapping because its owner/contract is not approved.
+Metric is a design review estimate, not proof of completeness. The one uncovered scenario is verified external-ERP mapping because its owner/contract is not defined.
 
 ## R. Representative MongoDB document
 
@@ -151,18 +151,18 @@ Metric is a design review estimate, not proof of completeness. The one uncovered
   "plantCode": "PLT-BLR-01",
   "plantName": "Bengaluru Vehicle Systems Plant",
   "description": "Automotive component manufacturing facility",
-  "status": "<value pending project approval>",
+  "status": "<value OPEN — value not defined>",
   "createdAt": ISODate("2026-10-08T09:00:00.000+0000"),
   "createdById": "5566778899001122",
   "createdBy": "MES Master Data Service"
 }
 ```
 
-Illustrative structure only; the status placeholder is intentionally not a valid production value and must be replaced after lifecycle approval.
+Illustrative structure only; the status placeholder is intentionally not a valid production value and must be replaced after lifecycle definition.
 
 ## S. Assumptions
 
-- Approved inventory assigns ownership to Planning & Scheduling.
+- Current inventory assigns ownership to Planning & Scheduling.
 - One record represents one plant/site boundary.
 - MES `_id` is the reference identity; code/name are display/business values.
 - No specific cloud, ERP, HR, or identity-provider integration is implied.
@@ -170,13 +170,16 @@ Illustrative structure only; the status placeholder is intentionally not a valid
 ## T. Open issues
 
 1. Confirm whether plant means plant, site, or both, and define owning master-data authority.
-2. Approve plant-code pattern, uniqueness scope, external mapping, and duplicate handling.
-3. Approve lifecycle vocabulary and state-dependent reference rules.
+2. Define and document plant-code pattern, uniqueness scope, external mapping, and duplicate handling.
+3. Define and document lifecycle vocabulary and state-dependent reference rules.
 4. Decide organization hierarchy, timezone, address, and plant settings ownership.
-5. Approve master-data rename propagation and deletion/retirement policy.
+5. Define and document master-data rename propagation and deletion/retirement policy.
 
 ## U. Final design review
 
-**Status:** APPROVED by the Project Owner on 2026-10-10. Flat schema and inventory boundary are recorded. **Readiness limitation:** implementation constraints depending on the open items above must remain deferred; APPROVED does not mean every business rule or integration is settled.
+**Status:** CURRENT under GEN-001, updated 2026-10-11. Flat schema and inventory boundary are recorded. **Readiness limitation:** implementation constraints depending on the open items above must remain deferred; CURRENT does not mean every business rule or integration is settled.
 
 **Research sources:** [ISA-95 series](https://www.isa.org/standards-and-publications/isa-standards/isa-95-standard); [SAP Digital Manufacturing service catalog](https://help.sap.com/docs/sap-digital-manufacturing/service-catalog/f8fc591655ca437082772a3416a2e158.html); [SAP DMC Feature Scope 2605](https://help.sap.com/doc/13c9f83611f94a5ab2c94f23cacfc217/latest/en-US/SAP_DMC_FSD_enUS.pdf).
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

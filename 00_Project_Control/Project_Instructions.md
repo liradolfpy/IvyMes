@@ -2,10 +2,10 @@
 
 **Document ID:** MES-CTRL-001
 **Document Name:** MES Project Master Instructions
-**Version:** 0.7
-**Status:** APPROVED
+**Version:** 0.8
+**Status:** CURRENT
 **Owner:** MES Project Team
-**Last Updated:** 2026-10-08
+**Last Updated:** 2026-10-11
 
 ---
 
@@ -22,10 +22,10 @@ The purpose of this document is to ensure that all project outputs remain:
 * Technically coherent
 * Reusable
 * Maintainable
-* Consistent with previously approved decisions
+* Consistent with established decisions
 * Suitable for incorporation into formal project documentation
 
-This document is the **authoritative source for project-specific working instructions** unless a later, explicitly approved project instruction supersedes a provision contained here.
+This document is the **authoritative source for project-specific working instructions** unless a later explicit user instruction or current project instruction supersedes a provision contained here.
 
 ---
 
@@ -130,16 +130,28 @@ The following hierarchy shall apply when determining which instruction takes pre
 ## 3.1 Instruction Hierarchy
 
 1. Applicable ChatGPT/system-level requirements
-2. Current Project Master Instructions
-3. Explicitly approved project decisions
-4. Current Project Context
-5. Existing approved project artifacts
-6. Instructions given in the current user request
+2. Explicit instructions given in the current user request, within their stated scope
+3. Current Project Master Instructions
+4. Current project decisions
+5. Current Project Context
+6. Current project artifacts
 7. General industry best practices
 
-Where two project instructions conflict, the more recent **explicitly approved** instruction shall take precedence.
+Where project instructions conflict, explicit current user instructions take precedence within their stated scope; otherwise the more recent current instruction takes precedence.
 
 If the conflict cannot be resolved reliably, ChatGPT shall identify the conflict rather than silently choosing one interpretation.
+
+---
+
+## GEN-001 — Simplified project decision workflow
+
+Routine requirements, documentation, collection designs, relationship models, and sample-data changes may proceed within the current user-authorized scope without separate approval at each stage. Check changes for consistency with current project rules and record material decisions and changes in the project logs.
+
+Explicit current user instructions supersede earlier project instructions within their stated scope. Keep unresolved business rules identified as OPEN; removing an approval step does not resolve missing requirements or establish production readiness. Where a material ambiguity affects the task, identify it and request clarification when necessary; continue work that does not depend on the answer.
+
+Require a separate approval step only where a specific requirement explicitly defines its purpose, scope, and responsible person. Existing manufacturing release, quality hold/release, waiver, and operational authorization concepts remain unchanged. Fields such as `approvalStatus` and `approvedAt`, and operational status values such as `PendingApproval` and `Approved`, describe MES business behavior rather than documentation sign-off.
+
+For new or revised documentation use DRAFT / CURRENT / SUPERSEDED and Updated By / Date. For new decisions use PROPOSED / CURRENT / SUPERSEDED and Recorded By / Date. Earlier APPROVED, PENDING, REJECTED, or DEPRECATED labels and approver records in historical log entries and revision histories remain historical evidence; they do not impose a new sign-off gate. Previously approved baselines remain current unless superseded. Reference-only notes and prompts cannot override current project instructions.
 
 ---
 
@@ -156,15 +168,15 @@ ChatGPT shall:
    * Confirmed requirements
    * Assumptions
    * Proposed solutions
-   * Approved decisions
+   * Current decisions
    * Open questions
-6. Avoid silently changing previously approved project decisions.
+6. Avoid silently changing established project decisions.
 7. Maintain traceability between requirements and resulting designs where practical.
 8. Prefer modular and reusable solutions.
 9. Prefer clear and maintainable designs over unnecessarily complex designs.
 10. Highlight contradictions between new requests and existing project rules.
 11. Ask for clarification when an ambiguity could materially affect the design.
-12. Never represent a proposed design as an approved project decision unless it has actually been approved.
+12. Never represent a proposed design as a current project decision unless it has been explicitly established and recorded.
 
 ---
 
@@ -260,7 +272,7 @@ Requirement identifiers shall not be unnecessarily changed once assigned.
 
 # 9. ARCHITECTURE AND DESIGN PRINCIPLES
 
-Unless specifically overridden by an approved project decision:
+Unless specifically overridden by a current project decision:
 
 1. Prefer clear separation of domains, responsibilities, and architectural layers.
 2. Avoid unnecessary coupling between functional modules and data domains.
@@ -272,11 +284,11 @@ Unless specifically overridden by an approved project decision:
 8. Consider auditability for business-critical project activities.
 9. Define transaction and consistency expectations where relevant to the architecture.
 10. Identify concurrency and synchronization requirements where multiple actors or systems may modify the same data.
-11. Avoid premature commitment to implementation technologies unless explicitly approved.
+11. Avoid premature commitment to implementation technologies unless explicitly selected and recorded within the authorized scope.
 12. Prefer understandable, maintainable, and technology-neutral architecture documentation.
 13. Clearly distinguish conceptual, logical, and physical schema decisions.
 14. Ensure relationships between functional requirements, business rules, data entities, workflows, and interfaces are traceable where practical.
-15. Do not turn an architectural proposal into an implementation commitment unless explicitly approved.
+15. Do not turn an architectural proposal into an implementation commitment unless explicitly selected and recorded within the authorized scope.
 
 ---
 
@@ -335,13 +347,13 @@ When a concept requires repeated items or relationships, represent each item or 
 
 ## 12.5 Numeric BSON Type Rule
 
-**DATA-002 — Every numeric field in a MongoDB collection specification shall identify a concrete BSON type; the ambiguous type label `Decimal` shall not be used.** For the Production Execution fields listed in approved `DEC-010`, use BSON `Double` and `Double(value)` in executable sample documents. Do not use decimal constructors in project sample documents. Because BSON `Double` can approximate some decimal fractions, field units, precision, rounding, and valid range shall be defined by approved requirements; do not infer missing rules. A scaled-integer representation requires a separate approved decision defining its scale, units, range, and conversion rules. Follow `01_Requirements/DataModelingConvention.md` for implementation details.
+**DATA-002 — Every numeric field in a MongoDB collection specification shall identify a concrete BSON type; the ambiguous type label `Decimal` shall not be used.** For the Production Execution fields listed in current `DEC-010`, use BSON `Double` and `Double(value)` in executable sample documents. Do not use decimal constructors in project sample documents. Because BSON `Double` can approximate some decimal fractions, field units, precision, rounding, and valid range shall be defined by current requirements; do not infer missing rules. A scaled-integer representation requires a documented decision defining its scale, units, range, and conversion rules. Follow `01_Requirements/DataModelingConvention.md` for implementation details.
 
 **DATA-003 — Entity stems in scalar reference keys shall be grammatically singular.** A single referenced entity shall use a singular ID/name pair, such as `workOrderId` + `workOrderName`; plural forms such as `workOrdersId` + `workOrdersName` are prohibited. Use conventional singular forms for irregular plurals, such as `traceableEntityId` and `traceabilityIdentityId` (not `traceableEntitiesId` or mechanically formed `traceabilityIdentitieId`). Repeated references shall be represented as separate flat relationship records under DATA-001, each with its own singular reference pair. Do not use pluralized scalar keys to imply multiplicity. Follow `01_Requirements/KeyNamingConvention.md` and `DataModelingConvention.md` for implementation details.
 
-**DATA-004 — Collection design specifications shall be organized by functional module.** Store each collection specification as `05_Design/Database/CollectionDesign/<moduleCode>/<collectionName>.md`, where `<moduleCode>` is the module code in the collection name and `<collectionName>` exactly matches the MongoDB collection name. Keep the ten current module folders (`prod`, `trace`, `qa`, `perf`, `plan`, `matl`, `maint`, `man`, `tool`, `ai`) distinct. Do not leave current collection specifications in the `CollectionDesign` root. Follow `01_Requirements/CollectionDesignOrganization.md` for the approved mapping and details.
+**DATA-004 — Collection design specifications shall be organized by functional module.** Store each collection specification as `05_Design/Database/CollectionDesign/<moduleCode>/<collectionName>.md`, where `<moduleCode>` is the module code in the collection name and `<collectionName>` exactly matches the MongoDB collection name. Keep the ten current module folders (`prod`, `trace`, `qa`, `perf`, `plan`, `matl`, `maint`, `man`, `tool`, `ai`) distinct. Do not leave current collection specifications in the `CollectionDesign` root. Follow `01_Requirements/CollectionDesignOrganization.md` for the current mapping and details.
 
-**DATA-005 — Sample collection documents shall be organized by functional module.** Store each sample file as `05_Design/Database/Collections/<moduleCode>/<collectionName>.js`, using the module code embedded in the collection name and the exact full collection name as the filename. Use the ten approved module folders (`prod`, `trace`, `qa`, `perf`, `plan`, `matl`, `maint`, `man`, `tool`, `ai`); do not leave current sample collection files in the `Collections` root. This rule changes file organization only and does not approve sample data as production data. Follow `01_Requirements/SampleDataOrganization.md` for the approved mapping and details.
+**DATA-005 — Sample collection documents shall be organized by functional module.** Store each sample file as `05_Design/Database/Collections/<moduleCode>/<collectionName>.js`, using the module code embedded in the collection name and the exact full collection name as the filename. Use the ten current module folders (`prod`, `trace`, `qa`, `perf`, `plan`, `matl`, `maint`, `man`, `tool`, `ai`); do not leave current sample collection files in the `Collections` root. This rule changes file organization only and does not approve sample data as production data. Follow `01_Requirements/SampleDataOrganization.md` for the current mapping and details.
 
 
 ---
@@ -363,11 +375,11 @@ Sample documents created by ChatGPT shall clearly indicate their status.
 
 For example:
 
-> SAMPLE / DEMONSTRATION DOCUMENT — NOT AN APPROVED PRODUCTION DOCUMENT
+> SAMPLE / DEMONSTRATION DOCUMENT — ILLUSTRATIVE DATA
 
-unless the document has subsequently been approved.
+This label identifies illustrative content and does not establish production readiness.
 
-Sample documents should be realistic enough to demonstrate the intended system behavior but must not be mistaken for actual production data or approved requirements.
+Sample documents should be realistic enough to demonstrate the intended system behavior but must not be mistaken for actual production data or current requirements.
 
 ---
 
@@ -451,10 +463,10 @@ Reason:
 Alternatives Considered:
 Impact:
 Status:
-Approved By:
+Recorded By / Date:
 ```
 
-Once a decision is approved, future designs should respect it unless it is explicitly superseded.
+Once a decision is current, future designs should respect it unless it is explicitly superseded.
 
 ---
 
@@ -482,7 +494,7 @@ Previous:
 New:
 Reason:
 Requested By:
-Approved By:
+Recorded By / Date:
 ```
 
 ---
@@ -538,7 +550,7 @@ Before producing a significant artifact, verify:
 
 * [ ] Project terminology is consistent.
 * [ ] Relevant mandatory instructions were considered.
-* [ ] Existing approved decisions were respected.
+* [ ] Current decisions were respected.
 * [ ] Requirements are not contradicted.
 * [ ] Assumptions are identified.
 * [ ] TBD items are identified.
@@ -548,7 +560,7 @@ Before producing a significant artifact, verify:
 * [ ] Interfaces and integration boundaries are clearly identified.
 * [ ] Data entities, relationships, and schemas are clearly defined where applicable.
 * [ ] Sample data/documents are clearly identified as illustrative.
-* [ ] Proposed content is not represented as approved.
+* [ ] Proposed content is not represented as current.
 * [ ] No unnecessary implementation technologies have been introduced.
 * [ ] The artifact remains within the architecture/schema/documentation scope.
 * [ ] No software, UI implementation, hardware, or testing deliverable has been inadvertently introduced.
@@ -565,7 +577,7 @@ When working on the project tasks, ChatGPT should:
 
 * Check relevant project files when available.
 * Reuse established project terminology.
-* Maintain consistency with approved artifacts.
+* Maintain consistency with current artifacts.
 * Point out important contradictions.
 * Identify assumptions.
 * Suggest improvements when appropriate.
@@ -580,10 +592,10 @@ When working on the project tasks, ChatGPT should:
 * Present assumptions as facts.
 * Change established terminology without reason.
 * Introduce technologies merely because they are fashionable.
-* Replace an approved design without identifying the change.
+* Replace a current design without identifying the change.
 * Create contradictory versions of the same requirement.
 * Treat sample data as real data.
-* Mark documents APPROVED without approval.
+* Present unresolved requirements or proposed decisions as established facts.
 * Silently resolve significant ambiguities.
 
 ---
@@ -591,9 +603,9 @@ When working on the project tasks, ChatGPT should:
 # 30. TECHNOLOGY BASELINE
 
 
-Database platform: MongoDB is the approved primary database platform for the MES database architecture, data modeling, and collection/schema design.
-Numeric BSON fields: Every numeric field in a collection specification must name a concrete BSON type; the ambiguous type label `Decimal` is prohibited. Production Execution fields covered by approved DEC-010 use BSON `Double` and are shown with `Double(value)` in sample documents. Do not use decimal constructors in project sample documents. Follow `01_Requirements/DataModelingConvention.md` for precision, rounding, range, and scaled-integer rules.
-Other technology choices: No frontend, backend, cloud, operating system, PLC, hardware, or deployment technology is currently approved. These remain technology-neutral unless separately decided and recorded.
+Database platform: MongoDB is the current primary database platform for the MES database architecture, data modeling, and collection/schema design.
+Numeric BSON fields: Every numeric field in a collection specification must name a concrete BSON type; the ambiguous type label `Decimal` is prohibited. Production Execution fields covered by current DEC-010 use BSON `Double` and are shown with `Double(value)` in sample documents. Do not use decimal constructors in project sample documents. Follow `01_Requirements/DataModelingConvention.md` for precision, rounding, range, and scaled-integer rules.
+Other technology choices: No frontend, backend, cloud, operating system, PLC, hardware, or deployment technology has been selected. These remain technology-neutral unless separately decided and recorded.
 
 The project shall remain **technology-neutral at the frontend, backend, cloud platform, operating system, PLC platform, hardware platform, or deployment technology** 
 
@@ -641,14 +653,14 @@ The authoritative decision record is:
 The format is : 
 Decision: [Clear and concise statement of the architectural or technical decision made]
 Scope: [Explicitly define what components, modules, or layers the decision applies to, and what remains undecided or out of scope]
-Status: [APPROVED / PENDING / REJECTED / DEPRECATED]
-Approved By / Date: [Initials or Name of the approver] on [YYYY-MM-DD]
+Status: [PROPOSED / CURRENT / SUPERSEDED]
+Recorded By / Date: [Name] on [YYYY-MM-DD]
 
 Example: 
 Decision: MongoDB is the primary database platform for the MES architecture and collection/schema design.
 Scope: Applies to database and collection design. Frontend, backend, cloud, operating system, and deployment technologies remain undecided.
-Status: APPROVED
-Approved By / Date: SG on 2026-09-27
+Status: CURRENT
+Recorded By / Date: SG on 2026-09-27
 
 
 
@@ -707,6 +719,7 @@ Temporary instructions should not automatically become permanent project rules.
 | 0.5 | 2026-10-08 | Added DATA-003, requiring grammatically singular entity stems in scalar reference keys and separate flat records for repeated references; aligned project design outputs under DEC-015. | MES Project Team | APPROVED |
 | 0.6 | 2026-10-08 | Added DATA-004, requiring collection design specifications to be stored in module-code subfolders under `CollectionDesign`; aligned requirements, prompts, folder guidance, and all 118 existing specifications under DEC-016. | MES Project Team | APPROVED |
 | 0.7 | 2026-10-08 | Added DATA-005, requiring sample collection documents to be stored in module-code subfolders under `Collections`; aligned requirements, sample-generation prompt, folder guidance, and all 118 existing sample files under DEC-017. | MES Project Team | APPROVED |
+| 0.8 | 2026-10-11 | Apply GEN-001 / DEC-018; remove separate documentation sign-off gates and preserve unresolved rules and operational controls. | MES Project Team | CURRENT |
 
 ---
 
@@ -714,6 +727,9 @@ Temporary instructions should not automatically become permanent project rules.
 
 For all  project work:
 
-> **Maintain consistency with this Master Instructions document, the current project context, and approved project decisions. Clearly distinguish facts, requirements, assumptions, proposals, examples, and approved decisions. When instructions conflict or a material ambiguity exists, identify the issue rather than silently making a project decision.**
+> **Maintain consistency with this Master Instructions document, the current project context, and current project decisions. Clearly distinguish facts, requirements, assumptions, proposals, examples, and current decisions. Apply GEN-001 and the instruction hierarchy. When instructions conflict or a material ambiguity exists, identify the issue rather than silently making a project decision.**
 
 **END OF PROJECT MASTER INSTRUCTIONS**
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.

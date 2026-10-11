@@ -104,7 +104,7 @@ Date: 2026-10-07
 Decision: Create `mes_prod_instructionContent` as the MES registry for exact-version external work-instruction content references. Each `mes_prod_workInstruction` must reference one registry record using `instructionContentId` + `instructionContentName`. Each registry record has a required opaque `instructionContentLocator` that uniquely identifies one exact content version within the registry. The content payload remains outside MongoDB. The locator is stored as supplied; no provider, URI scheme, or storage technology is mandated. `Active` content references may be used for new Work Instruction revisions; `Retired` references remain resolvable historically.
 Scope: Production Execution work-instruction metadata and external-content reference management. This decision supersedes DEC-007's rule that no MES content-reference entity be used. External provider ownership and provider-specific locator resolution remain integration concerns.
 Reason: Establish a stable MES ID/name reference and resolve `instructionContentLocator` requiredness without embedding content or adding nested structures.
-Status: DEPRECATED — SUPERSEDED BY DEC-009
+Status: CURRENT — historical approval recorded below; self-supersession corrected under DEC-018
 Approved By / Date: Project Owner on 2026-10-07
 
 DEC-010
@@ -172,3 +172,14 @@ Scope: Applies to all current and future MES sample collection files. Collection
 Reason: Group the 118 sample files by functional module to make the sample-data library easier to navigate and maintain.
 Status: APPROVED
 Approved By / Date: Project Owner on 2026-10-08
+
+
+DEC-018
+Date: 2026-10-11
+Decision: Establish GEN-001. Routine user-authorized requirements, documentation, schemas, relationships, and sample-data work requires consistency checks and traceable material changes, without separate sign-off at each stage. Explicit current user instructions take precedence over earlier project instructions within their scope.
+Scope: Project documentation governance only. Supersedes earlier requirements for separate inventory, field-level schema, vocabulary, index, and sample-generation documentation approval. Unresolved rules remain OPEN. Manufacturing release, quality hold/release, waiver, and operational authorization behavior and status vocabularies are unchanged. Historical approval records remain evidence of earlier decisions; they do not impose new approval gates. Reference-only notes and prompts are not authoritative.
+Reason: Simplify the project workflow while preserving consistency, traceability, and visible requirements gaps.
+Status: CURRENT
+Recorded By / Date: Project Owner direction on 2026-10-11
+
+Record correction: DEC-009's historical status line incorrectly says it is superseded by itself. DEC-009 remains CURRENT and supersedes DEC-007, consistent with its scope and the current data model. This correction changes no business behavior.
