@@ -523,3 +523,24 @@ Affected files:
 - 00_Project_Control/Change_Log.md
 
 No Decisions_Log entry was added because this change records a proposed design sequence and documentation pointers, not a new business or technology decision.
+
+CHG-031
+Date: 2026-10-11
+Artifact: `100_Self_Notes/Prompts/120_Collection_Design.md` and stage prompt bundle
+Previous: One large collection-design prompt combined inventory review, research, dependency mapping, collection design, module review, and cross-module review. It contained stale technology assumptions and examples that could be mistaken for current project decisions.
+New: Replace the all-in-one prompt with a stage runner (`120`), shared project/authority/modeling rules (`121`), and six runnable stage prompts (`122`–`127`). Preserve the manufacturing research and schema-completeness guidance in the appropriate stages. Align the prompt with current project context, DATA-001/002/003, DEC-003/004/005/006/008/009/010/011/012/013/015/018/021/022, the 119-collection inventory, the dependency map, module folder convention, and GEN-001. Make prompts expressly reference-only and require reporting unresolved decisions without inventing or implicitly approving them.
+Reason: Let the project owner run collection design in controlled stages while retaining accumulated MES-specific rules and avoiding stale or conflicting prompt instructions.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 100_Self_Notes/Prompts/120_Collection_Design.md
+- 100_Self_Notes/Prompts/121_Collection_Design_Common_Rules.md
+- 100_Self_Notes/Prompts/122_Collection_Design_Stage_1_Inventory_Review.md
+- 100_Self_Notes/Prompts/123_Collection_Design_Stage_2_Research.md
+- 100_Self_Notes/Prompts/124_Collection_Design_Stage_3_Dependency_Mapping.md
+- 100_Self_Notes/Prompts/125_Collection_Design_Stage_4_Collection_Design.md
+- 100_Self_Notes/Prompts/126_Collection_Design_Stage_5_Module_Review.md
+- 100_Self_Notes/Prompts/127_Collection_Design_Stage_6_Cross_Module_Review.md
+- 00_Project_Control/Change_Log.md
+
+No Decisions_Log entry was added because this is a reference-prompt workflow change and records no new project decision.
