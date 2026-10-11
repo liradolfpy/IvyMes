@@ -1,14 +1,14 @@
 # Key Naming Instructions
 
-Documentation workflow: GEN-001 / DEC-018 applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
+Documentation workflow: GEN-001 in the master instructions applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
 
-**Version:** 0.5
+**Version:** 0.6
 **Status:** CURRENT
 **Updated:** 2026-10-08
 
 ## Purpose
 
-Use these conventions when designing keys and field names for MongoDB documents. The goal is to make fields predictable across collections, easy to understand in application code, and consistent with the flat, strategically denormalized document pattern shown below.
+Use these conventions when designing keys and field names. BSON and MongoDB shell instructions apply only when MongoDB is selected. Project-specific rules define ID format and document structure. The goal is predictable, readable fields consistent with the selected project model. The example below illustrates flat denormalization and does not impose its ID format or structure on every project.
 
 ## Typical document pattern
 
@@ -35,7 +35,7 @@ Use these conventions when designing keys and field names for MongoDB documents.
 - Prefer established business terminology used consistently across the application.
 - Use singular nouns for a field that holds one value, such as `relatedEntityName`.
 - Use a grammatically singular entity name in every reference key. Pair singular `<entity>Id` with singular `<entity>Name`; do not pluralize the entity stem to imply a multi-reference. For irregular plurals, use the conventional singular form, such as `traceableEntitiesId` → `traceableEntityId`, `traceabilityIdentitiesName` → `traceabilityIdentityName`, and `workOrdersId` + `workOrdersName` → `workOrderId` + `workOrderName`.
-- A repeated relationship is represented by multiple documents, each carrying one singular reference pair, under DATA-001. Do not encode multiplicity by pluralizing a scalar key. If one document truly must refer to several entities, model the relationship as separate flat records or obtain a documented design decision; arrays remain prohibited.
+- When DATA-001 flat modeling is selected, a repeated relationship uses multiple documents, each carrying one singular reference pair. Do not encode multiplicity by pluralizing a scalar key. If one document truly must refer to several entities, model the relationship as separate flat records or obtain a documented design decision; arrays remain prohibited when the project adopts DATA-001 flat modeling.
 - Use a stable name consistently across every document in the same collection. Do not vary between synonyms such as `recordNo`, `recordNumber`, and `documentNo` for the same concept.
 - Avoid spaces, hyphens, punctuation, and special characters in field names, except for MongoDB's conventional `_id` key.
 - Do not use vague names such as `data`, `value`, `info`, or `misc` unless the field's purpose is made explicit by its context and documented.
@@ -43,7 +43,7 @@ Use these conventions when designing keys and field names for MongoDB documents.
 ## 2. Document identifier and business number
 
 - Use MongoDB's reserved `_id` key as the unique document identifier.
-- Store `_id` as a **string containing a custom 16-digit numeric identifier**, for example `"1000293847561029"`. Do not store it as a BSON number or use an `ObjectId` when following this convention.
+- Store `_id` using the type and format defined in project-specific rules. The string-ID example above illustrates one possible convention and does not prescribe its length for every project.
 - Give the record's human-readable business identifier a separate field, such as `recordNo`.
 - Use a consistent business-number pattern within each collection. Include a meaningful prefix and date or sequence component only when required by the business convention, for example `REC-2026-000001`.
 - Do not use `_id` and `recordNo` interchangeably: `_id` is the stable database identifier; `recordNo` is the readable business identifier.
@@ -51,10 +51,10 @@ Use these conventions when designing keys and field names for MongoDB documents.
 ## 3. Reference fields and paired display values
 
 - Name reference fields with the referenced entity followed by `Id`, such as `relatedEntityId`, `customerId`, or `createdById`.
-- Store reference IDs as strings using the same custom 16-digit ID convention.
-- Include the matching display field as a flat scalar alongside each reference ID. Usually use the matching entity name, for example `relatedEntityId` with `relatedEntityName`.
+- Store reference IDs using the same project-defined type and format as their referenced primary IDs.
+- When project rules require display pairs, include the matching display field alongside each reference ID. Usually use the matching entity name, for example `relatedEntityId` with `relatedEntityName`.
 - When a conventional name is not appropriate, use a clear descriptor such as `relatedEntityDescription`, `salesOrderNo`, or another stable identifying value.
-- Never include a reference ID without its matching name or description. Apply this rule to audit references as well as business references.
+- When project rules require ID/display pairs, never include a reference ID without its matching display value. Apply the selected pairing rule to audit and business references.
 - If an optional reference is unavailable, either omit both its ID and display fields or set both to `null`. Do not populate only one side of the pair.
 - Reuse the same ID for the same referenced entity across documents. Keep its accompanying name or description consistent, unless the design intentionally preserves a historical snapshot; document that choice.
 - Do not append `Id` to a name field or use ambiguous forms such as `relatedEntity` when it is unclear whether the value is an ID, name, or embedded object.
@@ -64,10 +64,10 @@ Use these conventions when designing keys and field names for MongoDB documents.
 Use these standard audit keys consistently:
 
 - `createdAt`: date and time when the document was created.
-- `createdById`: string ID of the user or process that created the document.
+- `createdById`: project-defined ID of the user or process that created the document.
 - `createdBy`: display name of the creator, paired with `createdById`.
 - `updatedAt`: date and time when the document was most recently updated.
-- `updatedById`: string ID of the user or process that last updated the document.
+- `updatedById`: project-defined ID of the user or process that last updated the document.
 - `updatedBy`: display name of the updater, paired with `updatedById`.
 
 Use `createdAt`/`createdById`/`createdBy` together when creation metadata is available. Use `updatedAt`/`updatedById`/`updatedBy` together when update metadata is available. If the document has never been updated, follow the application's convention consistently: omit the update fields or set the complete update group to `null` where appropriate. Do not leave an ID without its matching display name.
@@ -89,13 +89,13 @@ Field names should make the value's purpose clear, while the BSON type should ma
 - Store dates as BSON dates using `ISODate("YYYY-MM-DDTHH:mm:ss.sss+0000")` in MongoDB shell-style seed documents. Do not store timestamps as strings.
 - Use `NumberInt()` for ordinary 32-bit integer counts and quantities, where appropriate. Every numeric field must specify a concrete BSON type as required by DATA-002; use a suitable numeric BSON type for values that need a wider range or fractional precision.
 - Do not store numeric quantities as strings.
-- Use strings for names, descriptions, status values, business numbers, and IDs.
+- Use strings for names, descriptions, status values, and business numbers; use the project-defined type for IDs.
 - Use booleans for true/false attributes and `null` only when a value is genuinely unavailable.
 - Use units explicitly when a quantity requires them. For example, pair `quantity` with `uom`, or use a domain-specific field such as `weightUom` where needed.
 
 ## 7. Flat document and scalar-key conventions
 
-- Keep documents flat: represent each value with its own top-level key.
+- When flat modeling is required by project-specific rules, represent each value with its own top-level key.
 - Do not place fields inside nested documents or arrays when the collection's design requires flat documents.
 - Keep each key focused on one value and one purpose.
 - Do not create duplicate keys with slightly different names for the same information.
@@ -106,11 +106,11 @@ Field names should make the value's purpose clear, while the BSON type should ma
 Before accepting a document or generating sample data, verify that:
 
 - All documents in the collection use the same key spelling and casing for the same concepts.
-- `_id` is a unique custom 16-digit string, and `recordNo` is the separate business identifier when one is required.
-- Each reference ID has its paired name or description field, including `createdById` and `updatedById`.
+- `_id` is a unique identifier matching the project-defined type and format, and `recordNo` is the separate business identifier when one is required.
+- Reference IDs have paired display fields, including audit references, when required by project-specific rules.
 - Related display values are consistent when they refer to the same entity.
 - Date, numeric, string, Boolean, and null values use appropriate BSON types.
-- The document follows the required flat structure and contains no unintended nested objects or arrays.
+- The document follows the project-defined structure; where flat modeling is required it contains no embedded objects or arrays.
 - Optional fields are handled consistently across documents.
 
 ## 9. Naming checklist
@@ -127,12 +127,6 @@ For every new key, ask:
 
 ## Revision history
 
-| Version | Date | Change | Approval |
+| Version | Date | Change | Status |
 |---|---|---|---|
-| 0.2 | 2026-09-28 | Require collection-specific status meaning, allowed-value definitions, and supported state-dependent rules; clarify that event classification may replace a separate record status where no independent lifecycle exists. | APPROVED |
-| 0.3 | 2026-10-07 | Clarified that numeric fields must use a concrete BSON type under DATA-002 and use fractional precision terminology. | APPROVED |
-| 0.4 | 2026-10-08 | Require grammatically singular entity stems in scalar reference keys and define conventional singularization for irregular plurals; repeated references remain separate flat records under DATA-001. | APPROVED |
-
-
-
-Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+| Current | 2026-10-11 | Extract reusable rules; retain project settings separately. Earlier revision records are preserved in the project change log. | CURRENT |

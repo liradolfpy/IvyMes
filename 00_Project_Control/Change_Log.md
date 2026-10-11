@@ -257,3 +257,144 @@ Affected files:
 - 00_Project_Control/Change_Log.md
 - 00_Project_Control/Folder_Guide.md
 - 03_Functional_Structure/FunctionalStructureModules.md
+
+CHG-023
+Date: 2026-10-11
+Instruction / decision: DEC-019 — generic rules and project-specific settings
+Current applicability: Historical genericization record; superseded in part by CHG-024 / DEC-020 for Project_Instructions.md and DataModelingConvention.md. Those two files are now user-restored MES-specific content. The remaining genericization changes stay current.
+Previous: The reusable master and requirements embedded MES name, scope, technology, module codes, IDs, sample settings, and business numbering.
+New: Generic files reference project settings. Preserve MES description in Project_Context.md and database/sample/numbering settings in ProjectSpecificRules.md. Preserve architecture-only scope, designs, collection names, and all existing decisions. Standardize moduleCode folder placeholders and permit documented cross-collection retrieval. Generic file metadata removes MES branding; historical revision excerpts below retain original project provenance.
+Reason: Reuse rules and folders in new projects without copying domain constraints.
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 00_Project_Control/Project_Instructions.md
+- 00_Project_Control/Folder_Guide.md
+- 01_Requirements/CollectionNamingConvention.md
+- 01_Requirements/CollectionDesignOrganization.md
+- 01_Requirements/SampleDataOrganization.md
+- 01_Requirements/KeyNamingConvention.md
+- 01_Requirements/DataModelingConvention.md
+- 01_Requirements/DocumentIdAndReferenceConvention.md
+- 00_Project_Control/Project_Context.md
+- 03_Functional_Structure/ProjectSpecificRules.md
+- 03_Functional_Structure/ProjectScopeBoundary.md
+- 00_Project_Control/Decisions_Log.md
+- 00_Project_Control/Change_Log.md
+
+## Preserved historical revision excerpts from generic files
+
+These excerpts record the earlier genericization operation. Project_Instructions.md and DataModelingConvention.md have since been restored by the Project Owner; their classification as generic files no longer applies. Their historical excerpts below remain provenance only.
+
+### Historical revision excerpt — 00_Project_Control/Project_Instructions.md
+
+# 42. REVISION HISTORY
+
+| Version | Date       | Change           | Author       | Approval |
+| ------- | ---------- | ---------------- | ------------ | -------- |
+| 0.1     | YYYY-MM-DD | Initial template | Project Team | APPROVED    |
+| 0.3 | 2026-09-27 | Added DATA-001, requiring flat MES MongoDB documents and separate records for repeated items and relationships. | MES Project Team | APPROVED |
+| 0.4 | 2026-10-07 | Added DATA-002, requiring concrete BSON numeric types and prohibiting decimal constructors in project sample documents; DEC-010 approves BSON Double for the identified Production Execution fields. | MES Project Team | APPROVED |
+| 0.5 | 2026-10-08 | Added DATA-003, requiring grammatically singular entity stems in scalar reference keys and separate flat records for repeated references; aligned project design outputs under DEC-015. | MES Project Team | APPROVED |
+| 0.6 | 2026-10-08 | Added DATA-004, requiring collection design specifications to be stored in module-code subfolders under `CollectionDesign`; aligned requirements, prompts, folder guidance, and all 118 existing specifications under DEC-016. | MES Project Team | APPROVED |
+| 0.7 | 2026-10-08 | Added DATA-005, requiring sample collection documents to be stored in module-code subfolders under `Collections`; aligned requirements, sample-generation prompt, folder guidance, and all 118 existing sample files under DEC-017. | MES Project Team | APPROVED |
+| 0.8 | 2026-10-11 | Apply GEN-001 / DEC-018; remove separate documentation sign-off gates and preserve unresolved rules and operational controls. | MES Project Team | CURRENT |
+
+---
+
+### Historical revision excerpt — 01_Requirements/CollectionDesignOrganization.md
+
+## Revision history
+
+| Version | Date | Change | Approval |
+|---|---|---|---|
+| 1.0 | 2026-10-08 | Established mandatory module-code subfolders for all collection design specifications under DATA-004 / DEC-016. | APPROVED |
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+
+### Historical revision excerpt — 01_Requirements/SampleDataOrganization.md
+
+## Revision history
+
+| Version | Date | Change | Approval |
+|---|---|---|---|
+| 1.0 | 2026-10-08 | Established mandatory module-code subfolders for all sample collection documents under DATA-005 / DEC-017. | APPROVED |
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+
+### Historical revision excerpt — 01_Requirements/KeyNamingConvention.md
+
+## Revision history
+
+| Version | Date | Change | Approval |
+|---|---|---|---|
+| 0.2 | 2026-09-28 | Require collection-specific status meaning, allowed-value definitions, and supported state-dependent rules; clarify that event classification may replace a separate record status where no independent lifecycle exists. | APPROVED |
+| 0.3 | 2026-10-07 | Clarified that numeric fields must use a concrete BSON type under DATA-002 and use fractional precision terminology. | APPROVED |
+| 0.4 | 2026-10-08 | Require grammatically singular entity stems in scalar reference keys and define conventional singularization for irregular plurals; repeated references remain separate flat records under DATA-001. | APPROVED |
+
+
+
+Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+
+### Historical revision excerpt — 01_Requirements/DataModelingConvention.md
+
+### Revision history
+
+| Version | Date | Change | Status |
+|---|---|---|---|
+| 1.0 | 2026-10-07 | Established concrete BSON numeric-type requirements; approved BSON `Double` for the Production Execution fields previously labeled `Decimal` under DEC-010. | APPROVED |
+| 1.1 | 2026-10-08 | Added singular entity-stem rules for scalar reference pairs and aligned repeated references with DATA-001 separate-record modeling. | APPROVED |
+
+---
+
+### Historical revision excerpt — 01_Requirements/DocumentIdAndReferenceConvention.md
+
+# 21. Revision History
+
+  --------------------------------------------------------------------------
+  Version        Date           Change         Author         Approval
+  -------------- -------------- -------------- -------------- --------------
+  0.1            2026-09-27     Initial draft  MES Project    APPROVED
+                                covering       Team           
+                                system IDs,                   
+                                external IDs,                 
+                                business                       
+                                numbers,                       
+                                uniqueness,                   
+                                and reference                 
+                                lifecycle                     
+  0.2            2026-09-28     Mark Production MES Project    APPROVED
+                                Order as a                    
+                                business-number               
+                                entity under                  
+                                approved                      
+                                DEC-004.                      
+
+  0.3            2026-10-07     Approve Production Execution  APPROVED
+                                business-number patterns,
+                                requiredness, and uniqueness
+                                scopes under DEC-013.
+
+  0.4            2026-10-08     Reference-key naming aligned   APPROVED
+                                with DATA-003 / DEC-015:
+                                one-entity reference stems
+                                are grammatically singular.
+
+  --------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+CHG-024
+Date: 2026-10-11
+Instruction / decision: DEC-020 — retain restored project-specific instructions and modeling convention
+Previous: CHG-023 / DEC-019 classified Project_Instructions.md and DataModelingConvention.md among eight generic files.
+New: Record the Project Owner's restoration of Project_Instructions.md version 0.8 and DataModelingConvention.md version 1.2. These two files are current MES-specific content and are excluded from the reusable generic set. Six other generic files remain current. Amend DEC-019's applicability and annotate CHG-023 while retaining historical records. No restored file or other project artifact was modified in this correction.
+Reason: The Project Owner identified these two documents as project-specific and directed that their restored content be used.
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files in this correction:
+- 00_Project_Control/Decisions_Log.md
+- 00_Project_Control/Change_Log.md
+Restored files acknowledged; unchanged by this correction:
+- 00_Project_Control/Project_Instructions.md
+- 01_Requirements/DataModelingConvention.md

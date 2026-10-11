@@ -1,16 +1,16 @@
 # Collection Design Specification Organization
 
-Documentation workflow: GEN-001 / DEC-018 applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
+Documentation workflow: GEN-001 in the master instructions applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.
 
-**Document ID:** MES-REQ-DATA-ORG-001  
-**Version:** 1.1  
+**Document ID:** REQ-DATA-ORG-001  
+**Version:** 1.2  
 **Status:** CURRENT  
 **Updated By / Date:** Project Owner direction on 2026-10-11
 **Last Updated:** 2026-10-11
 
 ## 1. Purpose
 
-This requirement defines the mandatory folder and file organization for MongoDB collection design specifications. It implements DATA-004 and DEC-016.
+This requirement defines the mandatory folder and file organization for MongoDB collection design specifications. It implements DATA-004.
 
 ## 2. Required path and filename
 
@@ -18,30 +18,15 @@ Store each collection specification at:
 
 `05_Design/Database/CollectionDesign/<moduleCode>/<collectionName>.md`
 
-The `<moduleCode>` is the functional module code embedded in the collection name. The `<collectionName>` is the exact full MongoDB collection name, including its `mes_` prefix and prescribed casing. Each collection has one specification file. Current specifications must not remain directly in the `CollectionDesign` root.
+The `<moduleCode>` is the functional module code embedded in the collection name. The `<collectionName>` is the exact full MongoDB collection name, including its project-defined prefix and prescribed casing. Each collection has one specification file. Current specifications must not remain directly in the `CollectionDesign` root.
 
-Example:
+Example path pattern: use the exact collection name and its project-defined module code.
 
-`mes_prod_workOrder` → `05_Design/Database/CollectionDesign/prod/mes_prod_workOrder.md`
+Sample documents are stored separately under `05_Design/Database/Collections/<moduleCode>/` as governed by `SampleDataOrganization.md` and DATA-005. This requirement defines collection specification storage only.
 
-Sample documents are stored separately under `05_Design/Database/Collections/<moduleCode>/` as governed by `SampleDataOrganization.md` and DATA-005 / DEC-017. This requirement defines collection specification storage only.
+## 3. Module folders
 
-## 3. Current module folders
-
-| Module code | Module |
-|---|---|
-| `prod` | Production Execution |
-| `trace` | Traceability |
-| `qa` | Quality Management |
-| `perf` | Performance |
-| `plan` | Planning & Scheduling |
-| `matl` | Material Management |
-| `maint` | Maintenance |
-| `man` | Manpower Management |
-| `tool` | Tool Management |
-| `ai` | Analytics |
-
-Use the module code from the collection name as the folder name. Do not create ad hoc aliases or duplicate a collection specification in more than one module folder.
+Use module codes from `03_Functional_Structure/FunctionalStructureModules.md`; there is no universal module list. Preserve any existing project mapping in project-specific rules. Do not create aliases or duplicate a collection artifact across modules.
 
 ## 4. Status and change control
 
@@ -49,9 +34,6 @@ This folder organization is a current mandatory project requirement. New collect
 
 ## Revision history
 
-| Version | Date | Change | Approval |
+| Version | Date | Change | Status |
 |---|---|---|---|
-| 1.0 | 2026-10-08 | Established mandatory module-code subfolders for all collection design specifications under DATA-004 / DEC-016. | APPROVED |
-
-
-Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+| Current | 2026-10-11 | Extract reusable rules; retain project settings separately. Earlier revision records are preserved in the project change log. | CURRENT |

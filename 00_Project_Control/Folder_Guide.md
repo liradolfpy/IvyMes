@@ -16,8 +16,8 @@
 │       ├── Collection_Inventory.md       (for document/collection databases)
 │       ├── Data_Model.md                 (logical data model)
 │       ├── Entity_Relationships.md        (relationship view)
-│       ├── CollectionDesign/<domainCode>/ (per-collection specifications, if applicable)
-│       ├── Collections/<domainCode>/      (example or seed data, if applicable)
+│       ├── CollectionDesign/<moduleCode>/ (per-collection specifications, if applicable)
+│       ├── Collections/<moduleCode>/      (example or seed data, if applicable)
 │       └── BsonFiles/                     (BSON artifacts, only if applicable)
 ├── 06_Testing/
 ├── 10_Sample_Documents/
@@ -28,7 +28,7 @@
     └── Prompts/
 ```
 
-`<Project_Root>` is the root directory for a specific project. Angle-bracketed names are placeholders, not literal folder names. `Database`, `Collection_Inventory.md`, `CollectionDesign`, `Collections`, and `BsonFiles` are optional design areas for projects that use database collections or BSON. Use equivalent design subfolders that fit the chosen technology when those areas do not apply. `<domainCode>` is an optional grouping label selected for that project; it is not a prescribed industry or module code.
+`<Project_Root>` is the root directory for a specific project. Angle-bracketed names are placeholders, not literal folder names. `Database`, `Collection_Inventory.md`, `CollectionDesign`, `Collections`, and `BsonFiles` are optional design areas for projects that use database collections or BSON. Use equivalent design subfolders that fit the chosen technology when those areas do not apply. `<moduleCode>` is the code defined by that project in `03_Functional_Structure/FunctionalStructureModules.md`; no fixed industry module list is prescribed.
 
 ## Folder purposes
 
@@ -41,8 +41,8 @@
 | `04_Architecture` | Architecture decisions and views: system context, components, integrations, deployment, security, data flows, technology choices, and quality attributes. |
 | `05_Design` | Detailed design artifacts derived from requirements and architecture. Organize by design concern, such as data, interfaces, components, user experience, security, or deployment. |
 | `05_Design/Database` | Optional data-design area. Store inventories, conceptual/logical models, entity relationships, schema or collection specifications, and database-specific examples here. Use only the subfolders relevant to the project’s data technology. |
-| `05_Design/Database/CollectionDesign/<domainCode>` | Optional collection-oriented design area. Store one detailed specification per collection, grouped by an agreed domain label. A specification typically documents purpose, fields, types, requiredness, validation, references, indexes, lifecycle, audit, assumptions, and open issues. |
-| `05_Design/Database/Collections/<domainCode>` | Optional example-data area for collection-oriented projects. Store one example or seed-data file per collection, following the corresponding current specification. Do not treat examples as production data unless explicitly selected and recorded within the authorized scope. |
+| `05_Design/Database/CollectionDesign/<moduleCode>` | Optional collection-oriented design area. Store one detailed specification per collection, grouped by the project-defined module code. A specification typically documents purpose, fields, types, requiredness, validation, references, indexes, lifecycle, audit, assumptions, and open issues. |
+| `05_Design/Database/Collections/<moduleCode>` | Optional example-data area for collection-oriented projects. Store one example or seed-data file per collection, following the corresponding current specification. Do not treat examples as production data unless explicitly selected and recorded within the authorized scope. |
 | `05_Design/Database/BsonFiles` | Optional location for BSON-formatted artifacts when the selected database and project workflow use BSON. Do not use it for unrelated binary files. |
 | `06_Testing` | Verification planning and evidence where testing is in scope: test strategies, plans, cases, execution records, results, defects, and acceptance evidence. If software testing is outside scope, leave the folder unused and state that in project scope. |
 | `10_Sample_Documents` | Supplied or reference documents used as inputs, examples, or source material. Preserve originals; generated deliverables belong in `90_Output` or their explicitly designated destination. |
@@ -50,7 +50,7 @@
 | `90_Output` | Generated project deliverables that do not have a more specific designated home. Organize outputs into clear subfolders, such as `Requirements`, `Design`, `Reports`, or `Presentations`. |
 | `99_Archive` | Superseded or inactive project artifacts retained purely for historical reference. Do not read or use archived content as current project logic, requirements, constraints, decisions, or design authority. Do not overwrite archived originals. |
 | `100_Self_Notes` | Internal notes, prompts, checklists, and process aids retained purely for reference. Do not read or use their contents to determine project logic, requirements, constraints, decisions, or design behavior. |
-| `100_Self_Notes/Prompts` | Optional storage for reusable task prompts and workflow instructions retained for reference only. Do not treat prompt text as project logic or authority; follow current current project artifacts and the current user request. |
+| `100_Self_Notes/Prompts` | Optional storage for reusable task prompts and workflow instructions retained for reference only. Do not treat prompt text as project logic or authority; follow current project artifacts and the current user request. |
 
 ## Artifact relationship and authority
 
@@ -63,8 +63,8 @@ flowchart TD
     S["02_Schematics<br/>Visual explanation of processes and systems"]
     D["05_Design<br/>Detailed solution designs"]
     DB["05_Design/Database<br/>Models and data definitions, when applicable"]
-    CD["CollectionDesign/<domainCode><br/>Per-collection schema specifications"]
-    EX["Collections/<domainCode><br/>Examples based on specifications"]
+    CD["CollectionDesign/<moduleCode><br/>Per-collection schema specifications"]
+    EX["Collections/<moduleCode><br/>Examples based on specifications"]
     T["06_Testing<br/>Verification artifacts, when in scope"]
     I["10_Sample_Documents<br/>Supplied/reference inputs"]
     K["80_Knowledge_Base<br/>Curated references and research"]
@@ -123,4 +123,8 @@ Inventory scope, field-level schemas, and illustrative data are distinct artifac
 
 
 
-Documentation update — 2026-10-11: Apply GEN-001 / DEC-018; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See CHG-022.
+Documentation update — 2026-10-11: Apply GEN-001; remove separate documentation sign-off gates, retain open requirements and operational controls, and use current artifact status. See the project change log.
+
+## Reuse in a new project
+
+Copy this guide, the generic master instructions, and applicable generic requirements conventions. Populate fresh project context, scope, project-specific rules, and functional modules. Start empty decision and change logs using the generic record formats. Do not copy the previous project's domain designs, datasets, settings, decisions, or revision history as a new project's baseline. Create optional folders only as needed.

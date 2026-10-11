@@ -16,7 +16,7 @@ Hardware design, PLC programming, sensor engineering, machine design, physical d
 Software testing, test execution, QA execution, performance testing, UAT, validation, and test reporting are outside project scope. Requirements may include acceptance criteria or validation rules where useful for the specification, but these shall not be developed into a testing workstream.
 
 **SCOPE-006 — Sample Artifacts Only**  
-Sample documents, sample datasets, reports, forms, labels, certificates, and illustrative records are documentation artifacts intended to demonstrate the proposed MES design. They shall not be represented as production-current documents or real operational data.
+Sample documents, sample datasets, reports, forms, labels, certificates, and illustrative records are documentation artifacts intended to demonstrate the proposed MES design. They shall not be represented as production-ready documents or real operational data.
 
 **SCOPE-007 — Architecture Before Implementation**  
 When an implementation question arises, first define the architecture, data model, interface contract, business rule, or specification required to resolve it. Do not unnecessarily proceed into implementation details.

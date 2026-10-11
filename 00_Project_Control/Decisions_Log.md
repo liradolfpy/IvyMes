@@ -183,3 +183,19 @@ Status: CURRENT
 Recorded By / Date: Project Owner direction on 2026-10-11
 
 Record correction: DEC-009's historical status line incorrectly says it is superseded by itself. DEC-009 remains CURRENT and supersedes DEC-007, consistent with its scope and the current data model. This correction changes no business behavior.
+
+DEC-019
+Date: 2026-10-11
+Decision: Separate reusable master instructions, folder rules, and requirements conventions from MES-specific context, scope, database settings, module mapping, sample settings, and numbering rules.
+Scope: Generic instructions defer project settings to Project_Context.md, ProjectScopeBoundary.md, ProjectSpecificRules.md, and the functional structure. Existing MES collections, fields, operational controls, design artifacts, and historical decisions are retained. Section 8.5 of DocumentIdAndReferenceConvention.md now points to the unchanged DEC-013 numbering table in ProjectSpecificRules.md. DATA-001 through DATA-005 retain their existing MES settings there. New projects populate their own settings and start fresh logs.
+Reason: Reuse the folder system and simplified workflow without inheriting MES-specific constraints.
+Status: CURRENT WITH SCOPE AMENDED BY DEC-020 — Project_Instructions.md and DataModelingConvention.md are project-specific, not generic.
+Recorded By / Date: Project Owner direction on 2026-10-11
+
+DEC-020
+Date: 2026-10-11
+Decision: Retain the user-restored `00_Project_Control/Project_Instructions.md` (version 0.8) and `01_Requirements/DataModelingConvention.md` (version 1.2) as the current MES-specific instructions and modeling convention. Do not genericize these two files or replace their restored content.
+Scope: Amends DEC-019 only for these two files. The other six generic files remain reusable: Folder_Guide.md, CollectionNamingConvention.md, CollectionDesignOrganization.md, SampleDataOrganization.md, KeyNamingConvention.md, and DocumentIdAndReferenceConvention.md. Existing MES context, scope, settings, designs, and historical records remain retained. GEN-001 / DEC-018 remains the simplified documentation workflow. When reusing the generic files in another project, provide that project's own master instructions and modeling convention. For MES, consult the restored instructions and convention alongside the existing project-specific settings; any conflicting wording must be handled under the master instruction hierarchy rather than silently rewriting restored content.
+Reason: Project Owner identified the master instructions and data modeling convention as project-specific and restored them.
+Status: CURRENT
+Recorded By / Date: Project Owner direction on 2026-10-11
