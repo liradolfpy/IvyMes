@@ -211,3 +211,4 @@ Update this map whenever a material inventory, ownership, dependency, or approve
 
 Treat the map as the dependency checklist for Stage 4. Resolve or explicitly carry forward the open questions relevant to a collection group, then design specifications in dependency order. Keep each collection's specification status distinct from its inventory inclusion status.
 
+

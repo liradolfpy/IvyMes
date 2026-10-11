@@ -1,0 +1,203 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
+# mes_prod_andonCase — Collection Specification
+
+**Document ID:** MES-COL-PROD-andonCase  
+**Version:** 1.0  
+**Status:** APPROVED  
+**Approval basis:** Project Owner's prior instruction for collection specifications; OPEN issues below remain unresolved and are not thereby approved.  
+**Module:** prod  
+**Collection type:** Transaction  
+**Inventory baseline:** Collection Inventory v1.6.
+
+## A. Collection purpose
+
+Represents one Andon issue lifecycle from activation through acknowledgement/resolution or cancellation.
+
+## B. Business definition
+
+Andon Case is the parent lifecycle entity; individual transitions are stored as separate Andon Event records linked by andonCaseId/name per DEC-005.
+
+## C. Complete field dictionary
+
+| Field | BSON type | Requiredness | Business meaning | Validation | Reference | Index guidance | Reason | Evidence | Scenario |
+|---|---|---|---|---|---|---|---|---|---|
+| `_id` | String | Yes | Immutable globally unique 16-digit MES ID. | Exactly 16 digits; globally unique. | No | Default unique _id index | Primary identity | Project_Context DATA-003 | All references |
+| `createdAt` | Date | Yes | UTC creation time | BSON Date | No | No index by default | Audit | KeyNamingConvention | Creation |
+| `createdById` | String | Yes | 16-digit creator user/process ID | Pair with createdBy | User/process source OPEN | No index by default | Attribution | DATA-003 | Creation |
+| `createdBy` | String | Yes | Creator display value paired with createdById | Non-empty, matching ID | User/process display pair | No index by default | Readable attribution | KeyNamingConvention | Creation |
+| `updatedAt` | Date | Yes | UTC last update time | BSON Date >= createdAt | No | No index by default | Audit | KeyNamingConvention | Updates |
+| `updatedById` | String | Yes | 16-digit updater user/process ID | Pair with updatedBy | User/process source OPEN | No index by default | Attribution | DATA-003 | Updates |
+| `updatedBy` | String | Yes | Updater display value paired with updatedById | Non-empty, matching ID | User/process display pair | No index by default | Readable attribution | KeyNamingConvention | Updates |
+| `andonCaseNo` | String | Yes | Approved case business number. | AC-YYYY-######; globally unique (DEC-013). | No | Unique andonCaseNo | Case identity | DEC-013 | Andon retrieval |
+| `plantId` | String | Yes (proposed) | Plant context. | Paired with plantName. | Yes: plantId + plantName -> mes_plan_plant | Candidate plantId+status+activatedAt | Plant operational scope | DEC-022; DATA-003 | Andon board |
+| `plantName` | String | Yes (proposed) | Plant display snapshot. | Paired with plantId. | Yes: paired with plantId | No index by default | Readable scope | DATA-003 | Andon board |
+| `workCenterId` | String | Conditional | Optional planning work-center context; not machine identity. | If present pair with workCenterName. | Yes: workCenterId + workCenterName -> mes_plan_workCenter | Candidate workCenterId+status+activatedAt | Organization context | DEC-022 | Andon triage |
+| `workCenterName` | String | Conditional | Work Center display snapshot. | Both fields absent or present. | Yes: paired with workCenterId | No index by default | Readable context | DATA-003 | Andon board |
+| `workOrderId` | String | Conditional | Optional affected Work Order. | If present pair with workOrderName. | Yes: workOrderId + workOrderName -> mes_prod_workOrder | Candidate workOrderId+status | Execution context | DEC-004 | Order escalation |
+| `workOrderName` | String | Conditional | Work Order display snapshot. | Both fields absent or present. | Yes: paired with workOrderId | No index by default | Readable context | DATA-003 | Andon triage |
+| `andonType` | String | Yes (proposed) | Andon issue category. | Taxonomy and owner OPEN. | No | Candidate andonType+status | Triage category | Inventory | Andon board |
+| `description` | String | Yes | Issue statement. | Non-empty scalar text. | No | No index by default | Operator context | Andon workflow research | Triage |
+| `activatedAt` | Date | Yes | Case activation time. | BSON Date. | No | Candidate status+activatedAt | Lifecycle chronology | DEC-005 | Response time |
+| `status` | String | Yes | Current Andon case lifecycle state. | Active, Acknowledged, Resolved, Cancelled (DEC-011). | No | Candidate status+activatedAt | Case state distinct from event types | DEC-011; DEC-005 | Andon work queue |
+| `resolvedAt` | Date | Conditional | Resolution timestamp. | Present for resolved case; >= activatedAt. | No | Candidate resolvedAt | Closure chronology | DEC-005 | Resolution analytics |
+
+## D. Data types
+
+IDs, codes, names and descriptions are BSON String unless the field dictionary states otherwise; timestamps are BSON Date. Numeric and Boolean fields use their per-field BSON type. Any OPEN type is unresolved and blocks sample generation for that field. Decimal constructors are prohibited by DATA-002/DEC-010.
+
+## E. Required and optional fields
+
+Fields marked Yes are proposed as required unless a current decision explicitly establishes them. Fields marked No are optional. Proposed requiredness and unresolved rules remain identified in the dictionary.
+
+## F. ID–Name reference pairs
+
+- `plantId` — Yes: plantId + plantName -> mes_plan_plant.
+- `plantName` — Yes: paired with plantId.
+- `workCenterId` — Yes: workCenterId + workCenterName -> mes_plan_workCenter.
+- `workCenterName` — Yes: paired with workCenterId.
+- `workOrderId` — Yes: workOrderId + workOrderName -> mes_prod_workOrder.
+- `workOrderName` — Yes: paired with workOrderId.
+
+## G. Validation rules
+
+- Flat top-level scalar fields only; no nested documents or arrays.
+- MES IDs are 16-digit strings; external identifiers remain separate.
+- Enforce only approved code patterns and uniqueness scopes. Do not invent OPEN scopes or status vocabularies.
+- Required ID/display pairs are complete and consistent; optional pairs are both absent or both populated.
+- Audit actor pairs are complete; updatedAt >= createdAt.
+- Retired reference records remain historically resolvable when established by decision.
+
+## H. Status values
+
+Approved values per DEC-011: Active, Acknowledged, Resolved, Cancelled.
+
+## I. Relationships
+
+**Outgoing:** Plant; optional Work Center and Work Order.  
+**Incoming:** Andon Events; operation execution and analytics consumers.  
+**Dependencies:** Plant; optional Work Center and Work Order; Andon Event transition history.
+
+## J. Recommended indexes
+
+- Default unique _id index.
+- Unique andonCaseNo — Andon retrieval; verify query frequency and selectivity before implementation.
+- Candidate plantId+status+activatedAt — Andon board; verify query frequency and selectivity before implementation.
+- Candidate workCenterId+status+activatedAt — Andon triage; verify query frequency and selectivity before implementation.
+- Candidate workOrderId+status — Order escalation; verify query frequency and selectivity before implementation.
+- Candidate andonType+status — Andon board; verify query frequency and selectivity before implementation.
+- Candidate status+activatedAt — Response time; verify query frequency and selectivity before implementation.
+- Candidate status+activatedAt — Andon work queue; verify query frequency and selectivity before implementation.
+- Candidate resolvedAt — Resolution analytics; verify query frequency and selectivity before implementation.
+- No unique constraint is recommended where uniqueness scope is OPEN.
+
+## K. Audit fields
+
+createdAt, createdById, createdBy, updatedAt, updatedById, updatedBy. Actor identity ownership/source is OPEN; fields remain paired and flat.
+
+## L. Representative structure
+
+Illustrative shape only; placeholders are not sample data.
+
+
+{
+  _id: "1000000000000001",
+  andonCaseNo: "<andonCaseNo>",
+  plantId: "<plantId>",
+  plantName: "<plantName>",
+  workCenterId: "<workCenterId>",
+  workCenterName: "<workCenterName>",
+  workOrderId: "<workOrderId>",
+  workOrderName: "<workOrderName>",
+  andonType: "<andonType>",
+  description: "<description>",
+  activatedAt: <value>,
+  status: "<status>",
+  resolvedAt: <value>,
+  createdAt: ISODate("2026-06-01T08:00:00.000+0000"),
+  createdById: "1000000000000002",
+  createdBy: "MES Configuration Service",
+  updatedAt: ISODate("2026-06-01T08:00:00.000+0000"),
+  updatedById: "1000000000000002",
+  updatedBy: "MES Configuration Service"
+}
+
+
+## M. Assumptions
+
+- The current inventory purpose and module owner bound this design.
+- ID/display duplication is intentional strategic denormalization; copied-name synchronization policy remains OPEN unless decided.
+- APPROVED is the requested document status; it does not close OPEN business rules.
+
+## N. Open issues
+
+Andon type taxonomy; owner/assignee identity and escalation target; reopening semantics; resolution fields; optional asset identity versus no implied work-center-machine link; synchronization contract with event history.
+
+## O. Cross-collection consistency check
+
+- Inventory name and module: PASS.
+- Flat-document and singular naming rules: PASS.
+- ID format and standard audit pairs: PASS.
+- References: All defined targets exist. Work Center is organizational only; no equipment relationship inferred.
+- Status vocabulary: PASS — DEC-011 case values.
+- Unresolved dependencies: see Section N; no silent resolution.
+
+## P. Audit and Historical Data
+
+Use the standard audit pairs defined in Section K. Preserve source timestamps and correction lineage where approved; retention, immutability, and correction policy remain unresolved unless stated in the decision log.
+
+## Q. Real-World Manufacturing Exceptions
+
+Consider late/out-of-order input, duplicate integration delivery, incomplete operational context, shift boundaries, retries, and correction/reversal scenarios where applicable. Do not invent fields or encode structured payloads in scalar fields to address them.
+
+## R. Missing Field Assessment
+
+The field inventory is bounded by current requirements, decisions, and the inventory purpose. Remaining gaps are: Andon type taxonomy; owner/assignee identity and escalation target; reopening semantics; resolution fields; optional asset identity versus no implied work-center-machine link; synchronization contract with event history.. Raise missing operational data through requirements/change control; do not add fields silently.
+
+## S. Missing Collection Assessment
+
+No collection is added by this specification. Repeated concepts require separate flat records with explicit parent references. If a required owner or relationship record is absent from the inventory, record the gap for inventory review.
+
+## T. Cross-Collection Consistency Check
+
+- Collection name/module and inventory purpose checked.
+- Flat scalar fields and singular key convention checked.
+- System ID, reference-pair, and standard audit conventions checked.
+- Relationship targets and status/lifecycle semantics: see Sections H, I, O, and X; unresolved items remain OPEN.
+
+## U. Field Completeness Metrics
+
+- Dictionary fields (including standard audit and system ID): 0
+- Entity reference pairs: counted from Section F; audit actor pairs excluded.
+- Scenarios and evidence: field-level rows cite project rules or collection-specific research where applicable.
+- Requirements coverage cannot be claimed where detailed workflow requirements remain unavailable; see Sections R and X.
+
+## V. One Representative MongoDB Document
+
+The single flat representative structure is in Section L. No sample document set is generated in this design phase.
+
+## W. Assumptions
+
+- Inventory scope, current project context, and approved decisions bound this design.
+- ID/display duplication is intentional strategic denormalization.
+- APPROVED is the requested specification status; it does not close OPEN issues or establish production readiness.
+
+## X. Open Issues
+
+Andon type taxonomy; owner/assignee identity and escalation target; reopening semantics; resolution fields; optional asset identity versus no implied work-center-machine link; synchronization contract with event history.
+
+## Y. Research Sources
+
+See Research basis below; evidence supports operational scenarios only and does not approve unresolved project rules.
+
+## Z. Final Design Review
+
+Status label: APPROVED under prior Project Owner instruction. OPEN items remain unresolved and are not approved business decisions. Flat-document, naming, reference, and evidence checks are summarized in Sections O and T.
+## Research basis
+- [SAP Digital Manufacturing — Andon Management](https://help.sap.com/docs/sap-digital-manufacturing/execution/andon) — Andon capabilities capture production issues and support escalation/response workflows; project lifecycle and fields remain governed by DEC-005/DEC-011.
+
+## Readiness note
+
+Specification status is **APPROVED** under prior Project Owner instruction. Remaining OPEN issues are not approved decisions and do not establish production readiness.
+
+

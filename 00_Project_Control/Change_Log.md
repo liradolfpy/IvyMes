@@ -544,3 +544,202 @@ Affected files:
 - 00_Project_Control/Change_Log.md
 
 No Decisions_Log entry was added because this is a reference-prompt workflow change and records no new project decision.
+
+CHG-032
+Date: 2026-10-11
+Artifacts: 12 Wave 0 collection specifications under `05_Design/Database/CollectionDesign/{plan,matl,man,prod,perf,maint,tool}/`
+Previous: The current Collection Inventory contained 119 entries, but no collection-specific specification files existed in this project copy.
+New: Create twelve Wave 0 foundational specifications for Plant, Unit of Measure, Product, Material, Employee, Skill, Operation, Scrap Reason, Instruction Content, Downtime Classification, Failure Code, and Tool Class. Include collection-specific public research sources, field dictionaries, validation/index guidance, references, representative flat structures, A–Z Stage 4 sections, metrics, and explicit OPEN issues. Preserve unresolved field rules and approved ownership boundaries. Apply the Project Owner's prior instruction to mark the specifications APPROVED, while stating that OPEN issues are not thereby approved.
+Reason: Start requested all-module Stage 4 work in dependency order and provide reviewable foundational designs without inventing unresolved project decisions.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/CollectionDesign/plan/mes_plan_plant.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_unitOfMeasure.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_product.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_material.md
+- 05_Design/Database/CollectionDesign/man/mes_man_employee.md
+- 05_Design/Database/CollectionDesign/man/mes_man_skill.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_operation.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_scrapReason.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_instructionContent.md
+- 05_Design/Database/CollectionDesign/perf/mes_perf_downtimeClassification.md
+- 05_Design/Database/CollectionDesign/maint/mes_maint_failureCode.md
+- 05_Design/Database/CollectionDesign/tool/mes_tool_toolClass.md
+- 00_Project_Control/Change_Log.md
+
+No Decisions_Log entry was added because these specifications document designs and research, not new business decisions.
+
+CHG-033
+Date: 2026-10-11
+Artifacts: Eight Wave 1 collection specifications under `05_Design/Database/CollectionDesign/{plan,maint,man,matl,tool}/`; twelve Wave 0 specifications corrected for stale scope wording and literal newline artifacts; `05_Design/Database/Dependancy_Map.md` inventory baseline pointer.
+Previous: Twelve Wave 0 specifications existed. The dependency map identified the inventory baseline as v1.5 while the current authoritative inventory is v1.6. Wave 0 carried an obsolete “CURRENT inventory scope only” label and several literal `\`r\`n` sequences.
+New: Create Wave 1 specifications for Work Center, Production Calendar, Integration Exchange, Asset, Operator, Shift, WIP Location, and Tool Location. Add Stage 4 P–Z sections and collection-specific research references; record unresolved record grain, ownership, cardinality, vocabulary, and external-system rules as OPEN. Remove stale scope wording and line-break artifacts from Wave 0. Align the dependency-map header to Collection Inventory v1.6. Keep each specification APPROVED per the Project Owner's prior instruction while stating that OPEN items are not approved decisions.
+Reason: Continue all-module Stage 4 design in dependency order, using the current inventory and confirmed ownership decisions without inventing unresolved business rules.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/CollectionDesign/plan/mes_plan_workCenter.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_productionCalendar.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_integrationExchange.md
+- 05_Design/Database/CollectionDesign/maint/mes_maint_asset.md
+- 05_Design/Database/CollectionDesign/man/mes_man_operator.md
+- 05_Design/Database/CollectionDesign/man/mes_man_shift.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_wipLocation.md
+- 05_Design/Database/CollectionDesign/tool/mes_tool_toolLocation.md
+- 05_Design/Database/CollectionDesign/{plan,matl,man,prod,perf,maint,tool}/ (12 existing Wave 0 specifications)
+- 05_Design/Database/Dependancy_Map.md
+- 00_Project_Control/Change_Log.md
+
+No Decisions_Log entry was added because this batch documents collection designs and research but makes no new business decision.
+
+CHG-034
+Date: 2026-10-11
+Artifacts: Seven Wave 2 collection specifications in `05_Design/Database/CollectionDesign/{prod,matl,qa}/`.
+Previous: Wave 1 specifications were logged under CHG-033; no Wave 2 specifications existed in this project copy.
+New: Create specifications for `mes_prod_routing`, `mes_prod_routingOperation`, `mes_prod_workInstruction`, `mes_matl_billOfMaterial`, `mes_matl_bomComponent`, `mes_matl_materialSubstitutionRule`, and `mes_qa_specification`. Each includes collection-specific public research, A–Z design-review sections, one illustrative flat structure, relationships, field/type and index guidance, and explicit OPEN issues. Repeated routing steps and BOM components use separate records. Numeric BSON type for BOM quantity and repeated quality-characteristic ownership remain OPEN. Mark APPROVED per prior Project Owner instruction without treating OPEN issues as approved decisions.
+Reason: Continue Stage 4 collection design in dependency order, honoring DATA-001, DEC-003, DEC-009, DEC-010, DEC-022, and current inventory scope.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/CollectionDesign/prod/mes_prod_routing.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_routingOperation.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_workInstruction.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_billOfMaterial.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_bomComponent.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_materialSubstitutionRule.md
+- 05_Design/Database/CollectionDesign/qa/mes_qa_specification.md
+- 00_Project_Control/Change_Log.md
+
+No Decisions_Log entry was added because the specifications document research and candidate designs, not new business decisions.
+
+CHG-035
+Date: 2026-10-11
+Artifacts: Eighteen additional Wave 2 collection specifications in `05_Design/Database/CollectionDesign/{prod,matl,qa,maint,man,tool,plan,perf,trace,ai}/`.
+Previous: CHG-034 recorded the first seven Wave 2 specifications. The remaining Wave 2 inventory items had no collection-specific specifications.
+New: Create specifications for `mes_qa_samplingPlan`, `mes_qa_inspectionPlan`, `mes_maint_checklistDefinition`, `mes_maint_maintenancePlan`, `mes_man_crew`, `mes_man_crewMembership`, `mes_man_operatorSkill`, `mes_man_certification`, `mes_man_trainingRequirement`, `mes_tool_tool`, `mes_tool_toolCompatibilityRule`, `mes_plan_resourceCapacity`, `mes_plan_changeoverRule`, `mes_perf_performanceTarget`, `mes_trace_labelDefinition`, `mes_ai_kpiDefinition`, `mes_ai_dashboardDefinition`, and `mes_ai_dashboardRoleAccess`. Each includes collection-specific public research, A–Z Stage 4 review sections, a flat representative structure, relationships, candidate indexes, and unresolved dependencies. Repeated relationships are separate records; numeric type, role/target ownership, inspection/checklist row grain, analytics links, content locators, and value lists remain OPEN where not resolved. Mark APPROVED per the Project Owner's prior instruction; OPEN issues are not approved decisions.
+Reason: Complete the 25-collection Wave 2 dependency group without inventing missing taxonomies, relationship owners, numeric rules, or external-system decisions.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/CollectionDesign/qa/mes_qa_samplingPlan.md
+- 05_Design/Database/CollectionDesign/qa/mes_qa_inspectionPlan.md
+- 05_Design/Database/CollectionDesign/maint/mes_maint_checklistDefinition.md
+- 05_Design/Database/CollectionDesign/maint/mes_maint_maintenancePlan.md
+- 05_Design/Database/CollectionDesign/man/mes_man_crew.md
+- 05_Design/Database/CollectionDesign/man/mes_man_crewMembership.md
+- 05_Design/Database/CollectionDesign/man/mes_man_operatorSkill.md
+- 05_Design/Database/CollectionDesign/man/mes_man_certification.md
+- 05_Design/Database/CollectionDesign/man/mes_man_trainingRequirement.md
+- 05_Design/Database/CollectionDesign/tool/mes_tool_tool.md
+- 05_Design/Database/CollectionDesign/tool/mes_tool_toolCompatibilityRule.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_resourceCapacity.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_changeoverRule.md
+- 05_Design/Database/CollectionDesign/perf/mes_perf_performanceTarget.md
+- 05_Design/Database/CollectionDesign/trace/mes_trace_labelDefinition.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_kpiDefinition.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_dashboardDefinition.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_dashboardRoleAccess.md
+- 00_Project_Control/Change_Log.md
+
+No Decisions_Log entry was added because no new business decision was made; unresolved items remain OPEN.
+
+CHG-036
+Date: 2026-10-11
+Artifacts: Six Wave 3 collection specifications in `05_Design/Database/CollectionDesign/{plan,prod}/`.
+Previous: Wave 0–2 specifications had been created and logged; the Wave 3 collections had no collection-specific specifications.
+New: Create `mes_plan_productionPlan`, `mes_prod_productionOrder`, `mes_prod_workOrder`, `mes_plan_schedule`, `mes_plan_scheduleSimulation`, and `mes_plan_schedulePublication`. Add collection-specific public research, A–Z Stage 4 sections, flat representative structures, references, candidate indexes, and explicit OPEN issues. Align Production Order and Work Order to DEC-004; apply DEC-011/DEC-013 values to those Production Execution entities; use DEC-010 Double for the specified plannedQuantity fields only. Keep schedule-placement ownership and planning quantities/status rules OPEN. Mark APPROVED per prior Project Owner instruction without closing open issues.
+Reason: Continue collection design in dependency order while preserving the approved macro-order/micro-order boundary and avoiding a silently invented schedule detail collection.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/CollectionDesign/plan/mes_plan_productionPlan.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_productionOrder.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_workOrder.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_schedule.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_scheduleSimulation.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_schedulePublication.md
+- 00_Project_Control/Change_Log.md
+
+No Decisions_Log entry was added because these specifications apply existing decisions and make no new business decision.
+
+CHG-037
+Date: 2026-10-11
+Artifacts: Sixteen Wave 4 collection specifications across `trace`, `matl`, `man`, `tool`, `prod`, `perf`, and `maint`.
+Previous: Wave 0–3 specifications were logged through CHG-036. Eight Wave 4 specifications existed; eight remained.
+New: Complete Wave 4 with specifications for Lot, Serial Number, Inventory Balance, Labor Assignment, Tool Reservation, Dispatch Assignment, Operation Execution, Downtime Event, Shift Handover, Andon Case, Andon Event, Machine State Event, Cycle Time Observation, Production Loss Event, Energy Observation, and Condition Observation. Each file includes collection-specific research, flat representative structure, field/reference/index guidance, extended design-review sections, and explicit OPEN issues. Apply confirmed DEC-005/011/012/013 semantics, DEC-022 ownership boundaries, and scalar-only handover summary confirmation. No new collections or business decisions are introduced. All status labels remain APPROVED per prior Project Owner instruction; unresolved issues stay OPEN.
+Reason: Continue all-module Stage 4 collection design in dependency order, preserve inventory scope and established decisions, and make unresolved data ownership and telemetry/event semantics visible.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/CollectionDesign/trace/mes_trace_lot.md
+- 05_Design/Database/CollectionDesign/trace/mes_trace_serialNumber.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_inventoryBalance.md
+- 05_Design/Database/CollectionDesign/man/mes_man_laborAssignment.md
+- 05_Design/Database/CollectionDesign/tool/mes_tool_toolReservation.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_dispatchAssignment.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_operationExecution.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_downtimeEvent.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_shiftHandover.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_andonCase.md
+- 05_Design/Database/CollectionDesign/prod/mes_prod_andonEvent.md
+- 05_Design/Database/CollectionDesign/perf/mes_perf_machineStateEvent.md
+- 05_Design/Database/CollectionDesign/perf/mes_perf_cycleTimeObservation.md
+- 05_Design/Database/CollectionDesign/perf/mes_perf_productionLossEvent.md
+- 05_Design/Database/CollectionDesign/perf/mes_perf_energyObservation.md
+- 05_Design/Database/CollectionDesign/maint/mes_maint_conditionObservation.md
+
+No Decisions_Log entry was added because the designs apply existing decisions and carry unresolved design questions without deciding them.
+
+CHG-038
+Date: 2026-10-11
+Artifacts: Thirty-seven Wave 5 transaction/detail specifications across prod, matl, trace, qa, maint, man, and tool.
+Previous: Wave 0–4 specifications were completed through CHG-037. Wave 5 had no completed specification batch.
+New: Create the 37 inventory-defined Production Report, Rework, Scrap, Material Reservation/Movement/Consumption, WIP Movement, Kanban Signal, Inventory Hold, Finished Goods Declaration, Genealogy Link, As-Built Record, Label Print Event, Scan Event, Recall Case, Conformance Certificate, Inspection Request/Result, Nonconformance, Corrective Action, Deviation/Waiver, Quality Hold, SPC Observation, Calibration Verification, Maintenance Work Order/Schedule/Checklist Result, Training Record, Labor Time Entry, Attendance Record, and Tool Movement/Life/Usage/Calibration/Maintenance/Incident/Cost specifications. Include researched workflow evidence, flat-record grain, field/reference/index guidance, and explicit unresolved dependencies. No new collections or business decisions are introduced. Status labels are APPROVED under prior Project Owner direction; OPEN fields and rules remain unresolved.
+Reason: Continue Stage 4 design in dependency order while applying the inventory, flat-document convention, key conventions, shared master ownership, and existing decisions.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files: 05_Design/Database/CollectionDesign/{prod,matl,trace,qa,maint,man,tool}/<Wave-5 collection>.md (37 specifications).
+Wave 5 specifications: mes_prod_productionReport, mes_prod_reworkRecord, mes_prod_scrapRecord, mes_matl_materialReservation, mes_matl_materialMovement, mes_matl_materialConsumption, mes_matl_wipMovement, mes_matl_kanbanSignal, mes_matl_inventoryHold, mes_matl_finishedGoodsDeclaration, mes_trace_genealogyLink, mes_trace_asBuiltRecord, mes_trace_labelPrintEvent, mes_trace_scanEvent, mes_trace_recallCase, mes_trace_conformanceCertificate, mes_qa_inspectionRequest, mes_qa_inspectionResult, mes_qa_nonconformance, mes_qa_correctiveAction, mes_qa_deviationWaiver, mes_qa_qualityHold, mes_qa_spcObservation, mes_qa_calibrationVerification, mes_maint_maintenanceWorkOrder, mes_maint_maintenanceSchedule, mes_maint_checklistResult, mes_man_trainingRecord, mes_man_laborTimeEntry, mes_man_attendanceRecord, mes_tool_toolMovement, mes_tool_toolLifeRecord, mes_tool_toolUsageRecord, mes_tool_toolCalibrationRecord, mes_tool_toolMaintenanceOrder, mes_tool_toolIncident, mes_tool_toolCostRecord.
+
+No Decisions_Log entry was added because no new business decision was made.
+
+CHG-039
+Date: 2026-10-11
+Artifacts: Fifteen Wave 6 derived performance/analytics specifications across perf, maint, and ai.
+Previous: Wave 0–5 specifications were completed through CHG-038. Wave 6 collection specifications were absent.
+New: Create OEE Result, Shift Performance Summary, Asset Health Summary, KPI Result, Quality Analysis Result, Traceability Report, Downtime Analysis Result, Anomaly Result, Maintenance Insight, Production Forecast, Root Cause Case, Operational Query, Operational Alert, Recommendation, and Data Export Job specifications. Each distinguishes source records from derived results, includes collection-specific research, and leaves calculation/version, numeric, model, reference-owner, query/export, and workflow rules OPEN when not established. Keep Advisory Recommendation separate from controlled operational authorization. Status labels remain APPROVED per prior Project Owner direction.
+Reason: Complete the inventory’s final dependency wave without converting derived outputs into operational source records or inventing analytics governance.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files:
+- 05_Design/Database/CollectionDesign/perf/mes_perf_oeeResult.md
+- 05_Design/Database/CollectionDesign/perf/mes_perf_shiftPerformanceSummary.md
+- 05_Design/Database/CollectionDesign/maint/mes_maint_assetHealthSummary.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_kpiResult.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_qualityAnalysisResult.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_traceabilityReport.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_downtimeAnalysisResult.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_anomalyResult.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_maintenanceInsight.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_productionForecast.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_rootCauseCase.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_operationalQuery.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_operationalAlert.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_recommendation.md
+- 05_Design/Database/CollectionDesign/ai/mes_ai_dataExportJob.md
+
+No Decisions_Log entry was added because no new business decision was made.
+
+CHG-040
+Date: 2026-10-11
+Artifacts: Type guidance and extended review sections in all 119 collection specifications; reference-pair correction in Calibration Verification.
+Previous: The generator's type section incorrectly stated that no numeric fields were defined, including in designs that did define or explicitly left numeric types OPEN. The 52 Wave 5–6 files lacked the extended P–Z review structure used by earlier designs. Calibration Verification listed Tool, Asset, and Tool Calibration Record ID references without all three corresponding Name fields.
+New: Correct Section D across the complete collection-specification set to defer BSON types to the field dictionary, keep OPEN types unresolved, and state that Decimal constructors are prohibited by DATA-002/DEC-010. Add the established P–Z design review sections to the 52 Wave 5–6 specifications. Add toolName, assetName, and calibrationRecordName to the Calibration Verification dictionary and representative structure. Reconcile field count. No business decision or collection scope changed.
+Reason: Ensure type guidance reflects actual field dictionaries, preserve completeness of extended review coverage, and enforce the ID + Name reference convention.
+Requested By: Project Owner
+Recorded By / Date: Project Owner direction on 2026-10-11
+Affected files: All 119 specifications under 05_Design/Database/CollectionDesign/{ai,maint,man,matl,perf,plan,prod,qa,tool,trace}/; specifically, the three added display fields are in 05_Design/Database/CollectionDesign/qa/mes_qa_calibrationVerification.md.
+Validation: 119 design files match the 119 unique inventory names; no missing/extra/duplicate collection names; all status labels are APPROVED; all 119 contain required A–Z sections and research citations; no documented relationship target is absent; all documented entity ID/Name pairs have both dictionary fields; no literal newline/quote artifacts or embedded object-array patterns were found. OPEN design issues remain explicitly recorded.
+
+No Decisions_Log entry was added because this entry records design artifacts and consistency repairs, not a newly approved business decision.
