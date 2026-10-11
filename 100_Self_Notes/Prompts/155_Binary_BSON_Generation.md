@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 # MES STUDIO 3T SAMPLE DATA GENERATION — PHASE 13
 
 We are now preparing the approved sample documents for direct insertion into MongoDB using Studio 3T.

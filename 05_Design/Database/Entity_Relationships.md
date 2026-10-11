@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 # MES Entity Relationships — Production Execution Orders and Operations
 
 Documentation workflow: GEN-001 / DEC-018 applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.

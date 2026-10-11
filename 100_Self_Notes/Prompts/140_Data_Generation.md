@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 # MES SAMPLE DOCUMENT GENERATION — PHASE 6
 
 We are now generating sample documents for each of the  MongoDB collection for the 

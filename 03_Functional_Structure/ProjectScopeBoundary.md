@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 The following scope rules are mandatory:
 
 **SCOPE-001 — Architecture and Documentation Only**  

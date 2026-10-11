@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 # MES SAMPLE DATA ARTIFACT GENERATION — PHASE 12
 
 We have completed the approved sample-document generation for:

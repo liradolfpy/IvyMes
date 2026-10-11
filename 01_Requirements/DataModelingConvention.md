@@ -1,3 +1,5 @@
+**FILE TYPE: GENERIC**
+
 # Data Modelling Convention
 
 **Version:** 1.3

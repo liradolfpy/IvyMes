@@ -1,3 +1,5 @@
+**FILE TYPE: GENERIC**
+
 # Reusable Software Architecture Project Folder Guide
 
 **Purpose:** Define a reusable folder structure for software architecture and solution-design projects. The folder names are preserved as the current project template; their descriptions are technology- and industry-neutral unless a folder explicitly names a technical artifact type.

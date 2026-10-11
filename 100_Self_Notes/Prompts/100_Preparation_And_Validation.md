@@ -1,3 +1,5 @@
+**FILE TYPE: GENERIC**
+
 We are now beginning the Project Database / Collection Design phase.
 Before generating or modifying any collection definitions, study the complete Project Instructions and all currently available project artifacts relevant to:
 - Functional Structure

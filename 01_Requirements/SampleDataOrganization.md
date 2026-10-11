@@ -1,3 +1,5 @@
+**FILE TYPE: GENERIC**
+
 # Sample Collection Document Organization
 
 Documentation workflow: GEN-001 in the master instructions applies; routine authorized work requires consistency review and recorded material changes, without separate sign-off. Historical approval records remain historical.

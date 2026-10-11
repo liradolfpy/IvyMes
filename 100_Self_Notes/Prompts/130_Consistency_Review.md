@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 Perform a cross-collection MongoDB data-model consistency review.
 
 Do NOT redesign the collections yet.

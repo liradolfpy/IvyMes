@@ -1,3 +1,5 @@
+**FILE TYPE: GENERIC**
+
 # Project — ID, Business Number, Uniqueness and Reference Management Convention
 
 **Document ID:** DATA-REQ-001\

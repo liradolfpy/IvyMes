@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 Now design the MES MongoDB Collection Inventory.
 
 Use the authoritative Functional Structure, Requirements, Data Modeling Convention, Naming Convention, Project Context and approved decisions.

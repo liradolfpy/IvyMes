@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 CHG-001
 
 Date: 2026-09-27
@@ -424,3 +426,46 @@ Affected files:
 - 05_Design/Database/CollectionDesign/plan/mes_plan_plant.md (context note only)
 - 05_Design/Database/CollectionDesign/plan/mes_plan_workCenter.md (context note only)
 - 05_Design/Database/CollectionDesign/matl/mes_matl_unitOfMeasure.md (context note only)
+
+
+CHG-026
+Date: 2026-10-11
+Instruction / decision: File reuse classification tags
+Previous: Project files did not identify whether their content was reusable or project-specific at the top.
+New: Review and tag all 31 Markdown files with FILE TYPE: GENERIC or FILE TYPE: PROJECT SPECIFIC. Generic files contain reusable instructions, conventions, navigation indexes, folder policies, or an empty placeholder. Project-specific files contain current MES facts, designs, scope, module definitions, history, or prompts tied to MES settings. A tag identifies reuse scope, not approval, completeness, or authority. Self-notes remain reference-only and are not used as project logic. Generic technical guidance still requires the relevant database/modeling assumptions to apply.
+Reason: Make reusable files and project-specific content easy to distinguish.
+Recorded By / Date: Project Owner direction on 2026-10-11
+Classification details: ProjectSpecificRules.md is GENERIC because its current content is only a reusable navigation index. _sample.md is an empty GENERIC placeholder, not a completed template. The preparation prompt is GENERIC; the consistency-review prompt is PROJECT SPECIFIC because it assumes the selected flat-document and ID/display-pair model. Other MES prompts retain PROJECT SPECIFIC classification. No file body was changed except this change-log entry.
+Generic files (12):
+- 00_Project_Control/Folder_Guide.md
+- 00_Project_Control/Project_Instructions.md
+- 01_Requirements/CollectionDesignOrganization.md
+- 01_Requirements/CollectionNamingConvention.md
+- 01_Requirements/DataModelingConvention.md
+- 01_Requirements/DocumentIdAndReferenceConvention.md
+- 01_Requirements/KeyNamingConvention.md
+- 01_Requirements/SampleDataOrganization.md
+- 01_Requirements/_sample.md
+- 03_Functional_Structure/ProjectSpecificRules.md
+- 100_Self_Notes/Prompts/100_Preparation_And_Validation.md
+- 100_Self_Notes/_READ_ME.md
+Project-specific files (19):
+- 00_Project_Control/Change_Log.md
+- 00_Project_Control/Decisions_Log.md
+- 00_Project_Control/Project_Context.md
+- 03_Functional_Structure/FunctionalStructureModules.md
+- 03_Functional_Structure/FunctionalStructureSections.md
+- 03_Functional_Structure/ProjectScopeBoundary.md
+- 05_Design/Database/CollectionDesign/matl/mes_matl_unitOfMeasure.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_plant.md
+- 05_Design/Database/CollectionDesign/plan/mes_plan_workCenter.md
+- 05_Design/Database/Collection_Inventory.md
+- 05_Design/Database/Data_Model.md
+- 05_Design/Database/Entity_Relationships.md
+- 100_Self_Notes/Prompts/110_Collection_List.md
+- 100_Self_Notes/Prompts/120_Collection_Design.md
+- 100_Self_Notes/Prompts/130_Consistency_Review.md
+- 100_Self_Notes/Prompts/140_Data_Generation.md
+- 100_Self_Notes/Prompts/150_File_Generation.md
+- 100_Self_Notes/Prompts/155_Binary_BSON_Generation.md
+- 100_Self_Notes/Prompts/160_Database_Audit.md

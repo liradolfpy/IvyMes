@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 The following functional structure shall be treated as the current project baseline.
 
 | ID | Module |Module Code |Description | Status |

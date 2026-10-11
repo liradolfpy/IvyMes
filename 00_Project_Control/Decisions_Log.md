@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 DEC-001
 Decision: MongoDB is the primary database platform for the MES architecture and collection/schema design.
 Scope: Applies to database and collection design. Frontend, backend, cloud, operating system, and deployment technologies remain undecided.

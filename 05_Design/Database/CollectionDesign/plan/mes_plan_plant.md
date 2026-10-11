@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 # Collection Specification — `mes_plan_plant`
 
 **Specification status:** CURRENT — updated under GEN-001 on 2026-10-11

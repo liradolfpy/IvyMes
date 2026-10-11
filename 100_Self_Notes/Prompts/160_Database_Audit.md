@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 Perform the FINAL MES MongoDB DATABASE MODEL AUDIT.
 
 Review every collection specification and sample document in the project.

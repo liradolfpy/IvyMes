@@ -1,3 +1,5 @@
+**FILE TYPE: PROJECT SPECIFIC**
+
 # MES Project Context
 
 **Document ID:** MES-CTRL-CONTEXT-001

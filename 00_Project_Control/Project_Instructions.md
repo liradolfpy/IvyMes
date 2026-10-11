@@ -1,3 +1,5 @@
+**FILE TYPE: GENERIC**
+
 # Project Master Instructions
 
 **Document ID:** CTRL-001

@@ -1,3 +1,5 @@
+**FILE TYPE: GENERIC**
+
 # Project-Specific Rule References
 
 **Status:** CURRENT
